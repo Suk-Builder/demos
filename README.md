@@ -15,5 +15,6 @@
 | baihua-suite/ | 白桦全栈套件 | Wiki+后端Monorepo |
 | homepage/ | 白桦主页 | 个人主页 |
 | video-platform/ | Sukačev | 视频平台全栈 |
+| brick-deliverer/ | 递砖者 | 15万字自传 · 7层地层叙事 |
 
 MIT License
