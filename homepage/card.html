@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SukBuilder · 赛博名片</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a10;--card:#111118;--text:#e8e6e3;--text2:#8a8580;
+  --accent:#c45c2e;--gold:#c9a96e;--green:#00d4aa;--border:rgba(255,255,255,.08);
+}
+body{
+  background:var(--bg);color:var(--text);font-family:'Inter','PingFang SC',sans-serif;
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:40px 20px;gap:24px
+}
+.preview-title{color:var(--text2);font-size:13px;text-transform:uppercase;letter-spacing:2px}
+
+/* 名片区域 */
+.card{
+  width:1050px;height:630px;background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:48px 56px;display:flex;flex-direction:column;
+  justify-content:space-between;position:relative;overflow:hidden
+}
+.card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--accent),var(--gold),var(--green))
+}
+.card::after{
+  content:"";position:absolute;bottom:20px;right:20px;width:120px;height:120px;
+  border:1px solid var(--border);border-radius:50%;opacity:.3
+}
+
+.card-header{display:flex;justify-content:space-between;align-items:flex-start}
+.card-left{flex:1}
+.card-name{font-size:52px;font-weight:800;letter-spacing:-1px;margin-bottom:4px}
+.card-name span{color:var(--gold)}
+.card-title{font-size:18px;color:var(--text2);margin-bottom:24px}
+
+.card-info{list-style:none;display:flex;flex-direction:column;gap:10px}
+.card-info li{font-size:14px;color:var(--text2);display:flex;align-items:center;gap:10px}
+.card-info li::before{content:">";color:var(--accent);font-weight:bold}
+.card-info .highlight{color:var(--text);font-weight:600}
+
+.qr-wrap{
+  width:180px;height:180px;background:#fff;padding:8px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0
+}
+#qrcode{width:164px;height:164px}
+#qrcode img{display:block;width:100%;height:100%}
+
+.card-footer{
+  display:flex;justify-content:space-between;align-items:center;
+  border-top:1px solid var(--border);padding-top:20px;margin-top:8px
+}
+.card-url{font-size:13px;color:var(--text2);letter-spacing:1px}
+.card-ring{display:flex;align-items:center;gap:8px;color:var(--gold);font-size:13px}
+.card-ring::before{content:"";width:10px;height:10px;border:2px solid var(--gold);border-radius:50%}
+.card-zero{font-size:24px;color:var(--border);font-weight:200}
+
+/* 打印按钮 */
+.btn{
+  padding:12px 32px;border-radius:8px;font-size:14px;font-weight:600;
+  cursor:pointer;border:none;background:var(--accent);color:#fff;transition:.2s
+}
+.btn:hover{background:var(--gold);color:var(--bg)}
+
+/* 打印样式 */
+@media print{
+  body{background:#fff;padding:0}
+  .preview-title,.btn{display:none!important}
+  .card{
+    width:90mm;height:54mm;border-radius:0;border:1px solid #ddd;
+    padding:8mm;page-break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact
+  }
+  .card::after{display:none}
+  .card-name{font-size:16pt}
+  .card-title{font-size:9pt}
+  .card-info li{font-size:8pt}
+  .qr-wrap{width:22mm;height:22mm;padding:1mm}
+  #qrcode{width:20mm;height:20mm}
+  .card-url,.card-ring{font-size:7pt}
+  .card-zero{font-size:12pt}
+}
+</style>
+</head>
+<body>
+
+<div class="preview-title">屏幕预览 · 按 Ctrl+P 打印（建议铜版纸覆膜）</div>
+
+<div class="card">
+  <div class="card-header">
+    <div class="card-left">
+      <div class="card-name">Suk<span>Builder</span></div>
+      <div class="card-title">建造者 · 裂缝操作系统作者 · CAGI 架构师</div>
+      <ul class="card-info">
+        <li><span class="highlight">BDI 160</span> · 20岁 · 西安邮电大学</li>
+        <li>150篇论文 · 4篇发表 · 42天周期</li>
+        <li>坐标：重庆南川 · 金佛山脚下</li>
+        <li>GitHub：Suk-Builder</li>
+      </ul>
+    </div>
+    <div class="qr-wrap"><div id="qrcode"></div></div>
+  </div>
+
+  <div class="card-footer">
+    <span class="card-url">sukaczev.com · github.com/Suk-Builder</span>
+    <span class="card-ring">银戒指绑定</span>
+    <span class="card-zero">0</span>
+  </div>
+</div>
+
+<button class="btn" onclick="window.print()">🖨️ 打印名片</button>
+
+<script>
+// 生成二维码
+new QRCode(document.getElementById("qrcode"), {
+  text: "https://sukaczev.com",
+  width: 164,
+  height: 164,
+  colorDark : "#0a0a10",
+  colorLight : "#ffffff",
+  correctLevel : QRCode.CorrectLevel.H
+});
+</script>
+
+</body>
+</html>

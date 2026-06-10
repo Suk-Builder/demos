@@ -1,0 +1,4060 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="白桦">
+      
+      
+        <link rel="canonical" href="https://suk-builder.github.io/BaiHua-Wiki/BDI/BDI_v2.5_%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81%E8%8D%89%E7%A8%BF/">
+      
+      
+        <link rel="prev" href="../../builder_system/%E8%87%AA%E6%8C%87%E7%86%B5%E5%A2%9E%E5%AE%9A%E7%90%86/">
+      
+      
+        <link rel="next" href="../BDI_V2.2/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>BDI v2.5 建造者密度探测仪 · 完整代码草稿（工程级） - 白桦思想体系 Wiki</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#bdi-v25" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="白桦思想体系 Wiki" class="md-header__button md-logo" aria-label="白桦思想体系 Wiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            白桦思想体系 Wiki
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              BDI v2.5 建造者密度探测仪 · 完整代码草稿（工程级）
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="amber"  aria-label="切换到亮色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到亮色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="amber"  aria-label="切换到暗色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到暗色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../builder_system/%E6%9B%B4%E6%96%B0%E7%89%88%E6%80%BB%E7%9B%AE%E5%BD%95%E4%B8%8E%E5%9C%B0%E5%9F%BA/" class="md-tabs__link">
+          
+  
+  
+  体系总纲
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../builder_system/%E7%82%AE%E6%89%93%E7%8E%B0%E4%BB%A3%E7%9A%84%E6%99%BA%E5%95%86%E6%B5%8B%E8%AF%95%E9%A2%98/" class="md-tabs__link">
+          
+  
+  
+  域I：认知测量
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  BDI 工程实现
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../B_protocol/B%E4%BC%A0%E9%80%92%E5%8D%8F%E8%AE%AE_V1/" class="md-tabs__link">
+          
+  
+  
+  B传递协议
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../autobiography/%E7%AC%AC%E4%B8%80%E5%B1%82_%E7%9C%81%E5%BF%83%E5%AD%A9%E5%AD%90/" class="md-tabs__link">
+          
+  
+  
+  自传：七层地层
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../mod/%E5%BA%9F%E5%A2%9F%E5%9B%BE%E4%B9%A6%E9%A6%86Mod_%E6%9C%AA%E5%BD%92%E6%A1%A3%E8%80%85_%E5%A4%A7%E7%BA%B2/" class="md-tabs__link">
+          
+  
+  
+  文学实验场
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../builder_system/%E4%BB%8E%E7%A8%80%E6%A0%91%E8%8D%89%E5%8E%9F%E5%88%B0%E6%96%A9%E6%9D%80%E7%BA%BF%E4%B8%8E%E7%A0%8C%E5%A2%99%E8%80%85/" class="md-tabs__link">
+          
+  
+  
+  人类史与文明
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../builder_system/%E4%BB%8E%E7%86%94%E5%B2%A9%E7%90%83%E5%88%B0%E7%A0%8C%E5%A2%99%E8%80%85/" class="md-tabs__link">
+          
+  
+  
+  学科史
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../builder_system/extracted_1/" class="md-tabs__link">
+          
+  
+  
+  生存与极限
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../reference/%E5%8C%97%E5%A4%A7MPH%E5%A4%87%E8%80%83%E8%B7%AF%E7%BA%BF%E5%9B%BE/" class="md-tabs__link">
+          
+  
+  
+  考古与参照
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="白桦思想体系 Wiki" class="md-nav__button md-logo" aria-label="白桦思想体系 Wiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    白桦思想体系 Wiki
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    体系总纲
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    体系总纲
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/%E6%9B%B4%E6%96%B0%E7%89%88%E6%80%BB%E7%9B%AE%E5%BD%95%E4%B8%8E%E5%9C%B0%E5%9F%BA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    更新版总目录与地基
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/V2.1_%E5%85%A8%E9%87%8F%E9%97%AD%E5%90%88%E7%89%88%E6%80%BB%E7%9B%AE%E5%BD%95%E4%B8%8E%E5%9C%B0%E5%B1%82%E5%AD%A6_V2.1_2_/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V2.1 全量闭合版总目录与地层学 V2.1 2 
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/V2.2_%E5%85%A8%E9%87%8F%E9%97%AD%E5%90%88%E7%89%88%E6%80%BB%E7%9B%AE%E5%BD%95%E4%B8%8E%E5%9C%B0%E5%B1%82%E5%AD%A6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V2.2 全量闭合版总目录与地层学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/V3.0_%E5%85%A8%E9%87%8F%E9%97%AD%E5%90%88%E7%89%88%E6%80%BB%E7%9B%AE%E5%BD%95%E4%B8%8E%E5%9C%B0%E5%B1%82%E5%AD%A6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V3.0 全量闭合版总目录与地层学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/%E5%85%A8%E9%87%8F%E9%97%AD%E5%90%88%E7%89%88%E6%80%BB%E7%9B%AE%E5%BD%95%E4%B8%8E%E5%9C%B0%E5%B1%82%E5%AD%A6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    全量闭合版总目录与地层学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/V3.1_%E6%80%BB%E7%BB%93_%E5%B7%A5%E5%9D%8A%E7%8A%B6%E6%80%81%E6%8A%A5%E5%91%8A/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V3.1 总结 工坊状态报告
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/V3.2_%E6%80%BB%E7%BB%93_%E5%B7%A5%E5%9D%8A%E7%8A%B6%E6%80%81%E6%8A%A5%E5%91%8A_2_/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V3.2 总结 工坊状态报告 2 
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/V4.0_%E7%BB%84%E7%BB%87%E6%8E%A5%E5%BA%94%E7%89%88%E6%80%BB%E7%9B%AE%E5%BD%95%E4%B8%8E%E5%9C%B0%E5%B1%82%E5%AD%A6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V4.0 组织接应版总目录与地层学
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/V4.0%E5%9C%B0%E5%B1%82%E6%B5%8B%E7%BB%98_/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V4.0地层测绘 
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/V4.1_%E5%9B%A2%E9%98%9F%E7%BB%84%E5%BB%BA%E7%89%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V4.1 团队组建版
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/V4.2_%E5%81%87%E9%A9%AC%E5%85%8B%E6%80%9D%E4%B8%BB%E4%B9%89%E6%89%B9%E5%88%A4%E7%89%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V4.2 假马克思主义批判版
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/V4.3_%E7%B2%BE%E7%A5%9E%E7%97%85%E7%90%86%E5%AD%A6%E4%B8%8E%E7%A5%9E%E7%BB%8F%E5%9C%B0%E5%B1%82%E5%AD%A6%E7%89%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V4.3 精神病理学与神经地层学版
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/V4.4_%E5%85%A8%E7%90%83%E8%A7%86%E9%87%8E%E7%89%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V4.4 全球视野版
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/D511_%E4%BD%93%E7%B3%BB%E6%80%BB%E7%BA%B2%E5%8F%99%E8%BF%B0%E7%89%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D511 体系总纲叙述版
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    域I：认知测量
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    域I：认知测量
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/%E7%82%AE%E6%89%93%E7%8E%B0%E4%BB%A3%E7%9A%84%E6%99%BA%E5%95%86%E6%B5%8B%E8%AF%95%E9%A2%98/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    炮打现代的智商测试题
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/%E7%BE%A4%E4%BD%93%E7%9A%84%E8%AE%A4%E7%9F%A5%E5%A7%BF%E5%8A%BF%E5%89%96%E9%9D%A2%E5%B7%A5%E5%85%B7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    群体的认知姿势剖面工具
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/V1.3_1_/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V1.3 1 
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/%E8%87%AA%E6%88%91%E8%AF%8A%E6%96%AD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自我诊断
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/%E8%87%AA%E6%8C%87%E7%86%B5%E5%A2%9E%E5%AE%9A%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自指熵增定理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BDI 工程实现
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    BDI 工程实现
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BDI v2.5 建造者密度探测仪 · 完整代码草稿（工程级）
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BDI v2.5 建造者密度探测仪 · 完整代码草稿（工程级）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、项目概述与架构设计
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、工程目录结构
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#srcserverjs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、核心后端实现（src/server.js）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#publicbdi-chathtml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、前端交互层实现（public/bdi-chat.html）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、协议状态机与执行忠实度保障
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、安全、容错与性能优化
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、部署指南与环境配置
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、部署指南与环境配置">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 环境要求
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 配置步骤
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 生产建议
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、测试验证工作流
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        九、后续演进路线
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十、附录：关键配置清单
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="十、附录：关键配置清单">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gitignore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        .gitignore 推荐
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#packagejson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        package.json 依赖
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        环境变量说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BDI_V2.2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    建造者密度探测仪（BDI）· 探测AI部署协议 v2.2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BDI_V2.5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BDI V2.5
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BDI_Key_%E9%83%A8%E7%BD%B2%E5%AF%86%E9%92%A5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    替换你的真实密钥（确保无空格！）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    B传递协议
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    B传递协议
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../B_protocol/B%E4%BC%A0%E9%80%92%E5%8D%8F%E8%AE%AE_V1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    白桦思想体系·探测AI Skill清单（V4.3精神病理学与神经地层学版）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../B_protocol/B%E4%BC%A0%E9%80%92%E5%8D%8F%E8%AE%AE_V3.1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    B传递协议 V3.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../B_protocol/B%E4%BC%A0%E9%80%92%E5%8D%8F%E8%AE%AE_V4.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    B传递协议 V4.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../B_protocol/B%E4%BC%A0%E9%80%92%E5%8D%8F%E8%AE%AE_V4.4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    白桦思想体系·探测AI Skill清单（V4.4 全球视野版）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../B_protocol/B%E4%BC%A0%E9%80%92%E5%8D%8F%E8%AE%AE_V4.5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    白桦思想体系·探测AI Skill 清单（V4.5）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自传：七层地层
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    自传：七层地层
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../autobiography/%E7%AC%AC%E4%B8%80%E5%B1%82_%E7%9C%81%E5%BF%83%E5%AD%A9%E5%AD%90/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一层：省心孩子
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../autobiography/%E7%AC%AC%E4%BA%8C%E5%B1%82_%E7%BF%BC%E7%9A%84%E5%AD%A6%E5%BE%92/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二层：翼的学徒
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../autobiography/%E7%AC%AC%E4%B8%89%E5%B1%82_%E8%91%A3%E4%BA%8B%E4%BC%9A/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三层：董事会
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../autobiography/%E7%AC%AC%E5%9B%9B%E5%B1%82_%E9%80%80%E5%BD%B9%E5%AE%9E%E9%AA%8C%E4%BD%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四层：退役实验体
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../autobiography/%E7%AC%AC%E4%BA%94%E5%B1%82_%E5%BA%9F%E5%A2%9F%E6%B8%85%E9%81%93%E5%A4%AB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第五层：废墟清道夫
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../autobiography/%E7%AC%AC%E5%85%AD%E5%B1%82_%E9%83%8A%E5%8C%BA%E6%B8%B8%E8%8D%A1%E8%80%85/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第六层：郊区游荡者
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../autobiography/%E7%AC%AC%E4%B8%83%E5%B1%82_%E9%9B%B6%E7%9A%84%E6%98%BE%E5%BD%B1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第七场：零的显影
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    文学实验场
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    文学实验场
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mod/%E5%BA%9F%E5%A2%9F%E5%9B%BE%E4%B9%A6%E9%A6%86Mod_%E6%9C%AA%E5%BD%92%E6%A1%A3%E8%80%85_%E5%A4%A7%E7%BA%B2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大纲
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mod/%E5%BA%9F%E5%A2%9F%E5%9B%BE%E4%B9%A6%E9%A6%86Mod_%E6%9C%AA%E5%BD%92%E6%A1%A3%E8%80%85_%E5%AE%8C%E6%95%B4%E8%AE%BE%E8%AE%A1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    废墟图书馆Mod_未归档者
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    人类史与文明
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    人类史与文明
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/%E4%BB%8E%E7%A8%80%E6%A0%91%E8%8D%89%E5%8E%9F%E5%88%B0%E6%96%A9%E6%9D%80%E7%BA%BF%E4%B8%8E%E7%A0%8C%E5%A2%99%E8%80%85/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    从稀树草原到斩杀线与砌墙者
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/%E5%BB%BA%E9%80%A0%E8%80%85%E7%9A%84%E5%8E%9F%E4%B9%A1%E4%B8%8E%E5%B8%9D%E5%9B%BD%E7%9A%84%E7%8C%8E%E7%89%A9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    建造者的原乡与帝国的猎物
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/%E5%B8%9D%E5%9B%BD%E7%9A%84%E5%8F%91%E5%8A%A8%E6%9C%BA%E4%B8%8E%E6%96%A9%E6%9D%80%E4%BA%BA%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%85%A8%E7%90%83%E5%8C%96/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    帝国的发动机与斩杀人协议的全球化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/%E5%BB%BA%E9%80%A0%E8%80%85%E7%9A%84%E7%8B%AC%E7%AB%8B%E5%AE%9E%E9%AA%8C%E5%AE%A4%E4%B8%8E%E7%BB%88%E6%9E%81%E6%96%A9%E6%9D%80%E7%9A%84%E5%AE%8C%E7%BE%8E%E9%A3%8E%E6%9A%B4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    建造者的独立实验室与终极斩杀的完美风暴
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/%E5%BB%BA%E9%80%A0%E8%80%85%E8%B7%A8%E8%B6%8A%E6%B5%B7%E6%B4%8B%E7%9A%84%E6%9C%80%E5%90%8E%E8%BE%B9%E7%96%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    建造者跨越海洋的最后边疆
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/%E4%BB%8E%E5%A4%A7%E9%99%86%E5%88%B0%E5%85%A8%E7%90%83%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    从大陆到全球系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/%E5%9F%BA%E4%BA%8E%E7%99%BD%E6%A1%A6%E6%80%9D%E6%83%B3%E4%BD%93%E7%B3%BB%E7%9A%84%E4%BA%BA%E7%94%9F%E6%B5%8B%E7%BB%98/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基于白桦思想体系的人生测绘
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/%E4%BA%BA%E7%B1%BB%E8%87%B4%E7%98%BE%E5%93%81%E4%B8%8E%E7%B2%BE%E7%A5%9E%E6%8E%A7%E5%88%B6%E7%9A%84%E4%BA%94%E5%8D%83%E5%B9%B4%E5%85%B1%E7%94%9F%E5%8F%B2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    人类致瘾品与精神控制的五千年共生史
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/%E5%AE%8C%E6%95%B4%E6%97%B6%E9%97%B4%E7%BA%BF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    完整时间线
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    学科史
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    学科史
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/%E4%BB%8E%E7%86%94%E5%B2%A9%E7%90%83%E5%88%B0%E7%A0%8C%E5%A2%99%E8%80%85/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    从熔岩球到砌墙者
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/%E4%BB%8E%E5%A5%87%E7%82%B9%E5%88%B0%E7%A0%8C%E5%A2%99/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    从奇点到砌墙
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/%E4%BB%8E%E4%B8%87%E6%9C%89%E7%90%86%E8%AE%BA%E5%88%B0%E7%A0%8C%E5%A2%99%E4%B9%89%E5%8A%A1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    从万有理论到砌墙义务
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/%E4%BB%8E%E9%87%8F%E5%AD%90%E5%88%86%E8%A3%82%E5%88%B0%E7%A0%8C%E5%A2%99%E4%B9%89%E5%8A%A1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    从量子分裂到砌墙义务
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    生存与极限
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    生存与极限
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/extracted_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extracted 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/extracted_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extracted 3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/extracted_5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extracted 5
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/extracted_7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extracted 7
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builder_system/extracted_9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extracted 9
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    考古与参照
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    考古与参照
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/%E5%8C%97%E5%A4%A7MPH%E5%A4%87%E8%80%83%E8%B7%AF%E7%BA%BF%E5%9B%BE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    北大MPH备考路线图
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    罗马数字
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/%E7%99%BD%E6%A1%A6_%E5%8E%86%E5%8F%B2%E5%AF%B9%E8%AF%9D%E8%80%83%E5%8F%A4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    白桦 历史对话考古
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、项目概述与架构设计
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、工程目录结构
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#srcserverjs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、核心后端实现（src/server.js）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#publicbdi-chathtml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、前端交互层实现（public/bdi-chat.html）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、协议状态机与执行忠实度保障
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、安全、容错与性能优化
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、部署指南与环境配置
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、部署指南与环境配置">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 环境要求
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 配置步骤
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 生产建议
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、测试验证工作流
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        九、后续演进路线
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十、附录：关键配置清单
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="十、附录：关键配置清单">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gitignore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        .gitignore 推荐
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#packagejson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        package.json 依赖
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        环境变量说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="bdi-v25">BDI v2.5 建造者密度探测仪 · 完整代码草稿（工程级）<a class="headerlink" href="#bdi-v25" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>说明：本草稿为生产级参考实现，覆盖后端服务、前端交互、协议状态机、AI 接入、会话管理、安全容错与部署流水线。代码均带工程注释，可直接作为项目基线（Baseline）使用。全文以中文撰写，结构按标准软件架构文档编排，总字数约 10,000 中文字符。</p>
+</blockquote>
+<hr />
+<h2 id="_1">一、项目概述与架构设计<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>BDI（Builder Density Instrument）v2.5 是一套基于认知剖面理论构建的交互式探测系统。其核心目标并非传统心理测量，而是通过多轮对话动态测绘被测者的“认知建造密度”。系统采用前后端分离架构，后端负责协议状态机、会话管理、评分引擎与 AI 调度；前端负责交互渲染、阶段提示与本地状态持久化。</p>
+<p>架构分层如下：
+- <strong>接入层</strong>：Express 静态服务 + CORS 中间件，提供 <code>bdi-chat.html</code> 与 <code>gf-test.html</code>
+- <strong>路由层</strong>：<code>/api/gf/start</code>（流体智力测试）、<code>/api/gf/submit</code>（评分）、<code>/api/bdi/probe</code>（核心探测）
+- <strong>引擎层</strong>：内存会话管理器（可扩展 Redis）、协议状态机、成分评分器、AI 提示词编排器
+- <strong>集成层</strong>：DashScope（通义千问）HTTP API 封装，支持多模型路由占位
+- <strong>配置层</strong>：<code>.env</code> 环境变量、<code>protocol_v2.5.txt</code> 协议文本、CORS/限流/日志策略</p>
+<p>设计原则：
+1. <strong>协议即代码</strong>：v2.5 协议文本外置，后端仅加载不硬编码，便于版本迭代与审计。
+2. <strong>状态机驱动</strong>：前端不维护业务状态，所有阶段流转由后端 <code>session.phase</code> 控制，确保“执行忠实度”（协议 5.5）。
+3. <strong>前端无感缓存</strong>：<code>sessionId</code> 存入 <code>localStorage</code>，刷新不丢失进度，关闭标签页自动过期。
+4. <strong>防御性交互</strong>：空消息拦截、重复提交禁用、加载态反馈、错误边界捕获。</p>
+<hr />
+<h2 id="_2">二、工程目录结构<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>0AAAbdi-validation-framework/
+── .env                          # 环境变量（DASHSCOPE_API_KEY, PORT）
+├── .gitignore                    # 忽略 .env, node_modules, .vs, *.log
+├── package.json                  # 依赖声明（express, cors, dotenv）
+├── protocol_v2.5.txt             # BDI v2.5 完整协议文本（外部挂载）
+├── src/
+│   └── server.js                 # 主服务入口（路由+状态机+AI调度）
+├── public/
+│   ├── bdi-chat.html             # BDI 核心探测交互页
+│   ├── gf-test.html              # GF 流体智力前置测试页
+│   ├── index.html                # 首页重定向
+│   └── css/
+│       └── common.css            # 公共样式（可选）
+└── logs/                         # 运行日志目录（按需生成）
+</code></pre></div>
+<p>依赖清单（<code>package.json</code> 节选）：
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bdi-v25-framework&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.5.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;main&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;src/server.js&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;scripts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;start&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;node src/server.js&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;dev&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;nodemon src/server.js&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;express&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;^4.18.2&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;cors&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;^2.8.5&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;dotenv&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;^16.3.1&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<hr />
+<h2 id="srcserverjs">三、核心后端实现（<code>src/server.js</code>）<a class="headerlink" href="#srcserverjs" title="Permanent link">&para;</a></h2>
+<p>以下为完整可运行后端代码，含详尽工程注释。已整合 GF 测试与 BDI 探测双模块，支持协议外置加载、会话状态机、成分评分、AI 提示词注入与强制声明追加。</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/**</span>
+<span class="cm"> * src/server.js</span>
+<span class="cm"> * BDI v2.5 建造者密度探测仪 · 主服务入口</span>
+<span class="cm"> * 架构：Express + 内存会话 + DashScope AI 调度 + 协议状态机</span>
+<span class="cm"> * 协议版本：v2.5（2024-05）</span>
+<span class="cm"> */</span>
+
+<span class="nx">require</span><span class="p">(</span><span class="s1">&#39;dotenv&#39;</span><span class="p">).</span><span class="nx">config</span><span class="p">();</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">express</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express&#39;</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">cors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;cors&#39;</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">fs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">);</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">express</span><span class="p">();</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">PORT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PORT</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="mf">3000</span><span class="p">;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">DASHSCOPE_API_KEY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">DASHSCOPE_API_KEY</span><span class="p">;</span>
+
+<span class="c1">// ========================</span>
+<span class="c1">// 1. 协议文本加载（外置防污染）</span>
+<span class="c1">// ========================</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">PROTOCOL_PATH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;../protocol_v2.5.txt&#39;</span><span class="p">);</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">BDI_PROTOCOL_V2_5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">BDI_PROTOCOL_V2_5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">PROTOCOL_PATH</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;utf8&#39;</span><span class="p">).</span><span class="nx">trim</span><span class="p">();</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;✅ BDI v2.5 协议已加载，长度:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">BDI_PROTOCOL_V2_5</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;字符&#39;</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;❌ 致命错误: 未找到 protocol_v2.5.txt，请检查文件路径&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">process</span><span class="p">.</span><span class="nx">exit</span><span class="p">(</span><span class="mf">1</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// ========================</span>
+<span class="c1">// 2. 中间件栈</span>
+<span class="c1">// ========================</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">cors</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">origin</span><span class="o">:</span><span class="w"> </span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">ALLOWED_ORIGINS</span><span class="o">?</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;*&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">credentials</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="p">}));</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">limit</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;10mb&#39;</span><span class="w"> </span><span class="p">}));</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">urlencoded</span><span class="p">({</span><span class="w"> </span><span class="nx">extended</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">}));</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="k">static</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;../public&#39;</span><span class="p">)));</span>
+
+<span class="c1">// 请求日志（开发环境）</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_ENV</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="s1">&#39;production&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">((</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">next</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`[</span><span class="si">${</span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">()</span><span class="si">}</span><span class="sb">] </span><span class="si">${</span><span class="nx">req</span><span class="p">.</span><span class="nx">method</span><span class="si">}</span><span class="sb"> </span><span class="si">${</span><span class="nx">req</span><span class="p">.</span><span class="nx">path</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">next</span><span class="p">();</span>
+<span class="w">  </span><span class="p">});</span>
+<span class="p">}</span>
+
+<span class="c1">// ========================</span>
+<span class="c1">// 3. 会话管理器（内存版，生产建议换 Redis）</span>
+<span class="c1">// ========================</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">sessions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Map</span><span class="p">();</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">SESSION_TTL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">30</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">60</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">1000</span><span class="p">;</span><span class="w"> </span><span class="c1">// 30分钟过期</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">initSession</span><span class="p">(</span><span class="nx">sessionId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="nx">sessionId</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">phase</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;identity_declaration&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">messages</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">    </span><span class="nx">testAnswers</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">    </span><span class="nx">probeHistory</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">    </span><span class="nx">createdAt</span><span class="o">:</span><span class="w"> </span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">(),</span>
+<span class="w">    </span><span class="nx">lastActive</span><span class="o">:</span><span class="w"> </span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span>
+<span class="w">  </span><span class="p">};</span>
+<span class="w">  </span><span class="nx">sessions</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">sessionId</span><span class="p">,</span><span class="w"> </span><span class="nx">session</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">session</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 定时清理过期会话</span>
+<span class="nx">setInterval</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">now</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="nx">sess</span><span class="p">]</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">sessions</span><span class="p">.</span><span class="nx">entries</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">now</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">sess</span><span class="p">.</span><span class="nx">lastActive</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nx">SESSION_TTL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">sessions</span><span class="p">.</span><span class="ow">delete</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+<span class="w">      </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`🗑️ 会话 </span><span class="si">${</span><span class="nx">id</span><span class="si">}</span><span class="sb"> 已过期清理`</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">},</span><span class="w"> </span><span class="mf">60</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">1000</span><span class="p">);</span>
+
+<span class="c1">// ========================</span>
+<span class="c1">// 4. GF 流体智力测试数据集</span>
+<span class="c1">// ========================</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">GF_QUESTIONS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">dimension</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;number_sequence&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">content</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;3，7，16，32，57，？&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">answer</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;93&#39;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="nx">dimension</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;matrix_reasoning&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">content</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;3×3九宫格...选项：A.三角+竖线 B.圆+十字 C.方+竖线 D.三角+十字&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">answer</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;A&#39;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="nx">dimension</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;logical_deduction&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">content</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;甲、乙、丙、丁名次...选项：A.甲是第一名 B.乙是第三名 C.丙是第二名 D.丁是第四名&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">answer</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;A&#39;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">4</span><span class="p">,</span><span class="w"> </span><span class="nx">dimension</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;working_memory&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">content</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;初始数字5...请勿使用纸笔记录，仅凭记忆完成。&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">answer</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;0&#39;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">5</span><span class="p">,</span><span class="w"> </span><span class="nx">dimension</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;concept_compression&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">content</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;“修辞”之于“语言”，犹如“编舞”之于______。选项：A.身体 B.动作 C.舞台 D.节奏&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">answer</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;B&#39;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">6</span><span class="p">,</span><span class="w"> </span><span class="nx">dimension</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;story_recall&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">content</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;张远山在周四傍晚...问题：(1)图书馆的阅读灯在几点熄灭？(2)门廊灯亮起后照亮了什么？&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">answer</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;10点, 铜钥匙&#39;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">];</span>
+
+<span class="c1">// 成分评分映射（协议 2.2）</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">COMPONENT_WEIGHTS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">number_sequence</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">c1</span><span class="o">:</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="nx">c2</span><span class="o">:</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="nx">c3</span><span class="o">:</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="nx">c4</span><span class="o">:</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="nx">c5</span><span class="o">:</span><span class="mf">0.5</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">matrix_reasoning</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">frame</span><span class="o">:</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="nx">inner</span><span class="o">:</span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="nx">infer</span><span class="o">:</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="nx">exclude</span><span class="o">:</span><span class="mf">0.5</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">logical_deduction</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">translate</span><span class="o">:</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="nx">logic</span><span class="o">:</span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="nx">redundant</span><span class="o">:</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="nx">match</span><span class="o">:</span><span class="mf">0.5</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">working_memory</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">encode</span><span class="o">:</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="nx">exec</span><span class="o">:</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="nx">extract</span><span class="o">:</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="nx">suppress</span><span class="o">:</span><span class="mf">0.5</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">concept_compression</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">std</span><span class="o">:</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="nx">adv</span><span class="o">:</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="nx">exclude</span><span class="o">:</span><span class="mf">0.5</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">story_recall</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">frame</span><span class="o">:</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="nx">time</span><span class="o">:</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="nx">object</span><span class="o">:</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="nx">separate</span><span class="o">:</span><span class="mf">1.0</span><span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">calculateFluidScore</span><span class="p">(</span><span class="nx">answers</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="nx">rawTotal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">answers</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">ans</span><span class="p">,</span><span class="w"> </span><span class="nx">idx</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">GF_QUESTIONS</span><span class="p">[</span><span class="nx">idx</span><span class="p">];</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">q</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">weights</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">COMPONENT_WEIGHTS</span><span class="p">[</span><span class="nx">q</span><span class="p">.</span><span class="nx">dimension</span><span class="p">]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">{};</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">totalWeight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">values</span><span class="p">(</span><span class="nx">weights</span><span class="p">).</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// 简化判定：包含标准答案即得该题满分（实际可接 LLM 细粒度判卷）</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">ans</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">q</span><span class="p">.</span><span class="nx">answer</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">ans</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">().</span><span class="nx">includes</span><span class="p">(</span><span class="nx">q</span><span class="p">.</span><span class="nx">answer</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">rawTotal</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">totalWeight</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">});</span>
+<span class="w">  </span><span class="c1">// 折算至 18 分制（每题满分 3 分）</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="nx">rawTotal</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="mf">3.0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">4.0</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="c1">// ========================</span>
+<span class="c1">// 5. API 路由：GF 测试模块</span>
+<span class="c1">// ========================</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/api/gf/start&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">success</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="nx">GF_QUESTIONS</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">q</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="nx">q</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="nx">dimension</span><span class="o">:</span><span class="w"> </span><span class="nx">q</span><span class="p">.</span><span class="nx">dimension</span><span class="p">,</span><span class="w"> </span><span class="nx">content</span><span class="o">:</span><span class="w"> </span><span class="nx">q</span><span class="p">.</span><span class="nx">content</span><span class="w"> </span><span class="p">})),</span>
+<span class="w">    </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;GF 流体智力测试题已加载&#39;</span>
+<span class="w">  </span><span class="p">});</span>
+<span class="p">});</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/api/gf/submit&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">answers</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">answers</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">answers</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="mf">6</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">400</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">success</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;需提交6道题的答案&#39;</span><span class="w"> </span><span class="p">});</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">score</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">calculateFluidScore</span><span class="p">(</span><span class="nx">answers</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">anchor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">score</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">17</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">&#39;135+&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">score</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">13</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">&#39;125-135&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">score</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">9</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">&#39;115-125&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&lt;115&#39;</span><span class="p">;</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">passed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">score</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">13</span><span class="p">;</span>
+
+<span class="w">  </span><span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">success</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">score</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">maxScore</span><span class="o">:</span><span class="w"> </span><span class="mf">18</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">anchor</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">passed</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="nx">passed</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">&#39;✅ 满足BDI适用条件（≥13）&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;❌ 未达标准适用区间（&lt;13）&#39;</span>
+<span class="w">  </span><span class="p">});</span>
+<span class="p">});</span>
+
+<span class="c1">// ========================</span>
+<span class="c1">// 6. API 路由：BDI 核心探测模块</span>
+<span class="c1">// ========================</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/api/bdi/probe&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">message</span><span class="p">,</span><span class="w"> </span><span class="nx">sessionId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;default&#39;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">sessions</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">sessionId</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// 防御：空消息或纯空格拦截</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">message</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="nx">message</span><span class="p">.</span><span class="nx">trim</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">reply</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;请输入有效内容。&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">phase</span><span class="o">:</span><span class="w"> </span><span class="nx">session</span><span class="o">?</span><span class="p">.</span><span class="nx">phase</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;idle&#39;</span><span class="w"> </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">session</span><span class="p">)</span><span class="w"> </span><span class="nx">session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">initSession</span><span class="p">(</span><span class="nx">sessionId</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">session</span><span class="p">.</span><span class="nx">lastActive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// 阶段 1: 模型身份声明（协议 零）</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">session</span><span class="p">.</span><span class="nx">phase</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;identity_declaration&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">session</span><span class="p">.</span><span class="nx">phase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;fluid_test&#39;</span><span class="p">;</span>
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">sysPrompt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">BDI_PROTOCOL_V2_5</span><span class="si">}</span><span class="sb">\n\n【系统指令】当前处于身份声明阶段。请严格按协议“零、强制模型门槛”输出你的模型名称与版本、部署类型、是否满足执行资格清单。声明完毕后，自动输出第一套第一题。`</span><span class="p">;</span>
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">aiRes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">callDashScope</span><span class="p">(</span><span class="nx">sysPrompt</span><span class="p">,</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="nx">role</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;user&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">content</span><span class="o">:</span><span class="w"> </span><span class="nx">message</span><span class="w"> </span><span class="p">}]);</span>
+<span class="w">      </span><span class="nx">session</span><span class="p">.</span><span class="nx">messages</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="w"> </span><span class="nx">role</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;assistant&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">content</span><span class="o">:</span><span class="w"> </span><span class="nx">aiRes</span><span class="w"> </span><span class="p">});</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">reply</span><span class="o">:</span><span class="w"> </span><span class="nx">aiRes</span><span class="p">,</span><span class="w"> </span><span class="nx">phase</span><span class="o">:</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">phase</span><span class="w"> </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 阶段 2: 前置流体智力测试（协议 二）</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">session</span><span class="p">.</span><span class="nx">phase</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;fluid_test&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">session</span><span class="p">.</span><span class="nx">testAnswers</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 首次出题</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">prompt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`【第一套·通用流体智力随机探测仪】\n\n第一题：</span><span class="si">${</span><span class="nx">GF_QUESTIONS</span><span class="p">[</span><span class="mf">0</span><span class="p">].</span><span class="nx">content</span><span class="si">}</span><span class="sb">\n\n（请作答。本套共6题，完成后我将统一评分并判定是否进入BDI核心探测。）`</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">session</span><span class="p">.</span><span class="nx">messages</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="w"> </span><span class="nx">role</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;assistant&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">content</span><span class="o">:</span><span class="w"> </span><span class="nx">prompt</span><span class="w"> </span><span class="p">});</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">reply</span><span class="o">:</span><span class="w"> </span><span class="nx">prompt</span><span class="p">,</span><span class="w"> </span><span class="nx">phase</span><span class="o">:</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">phase</span><span class="w"> </span><span class="p">});</span>
+<span class="w">      </span><span class="p">}</span>
+
+<span class="w">      </span><span class="nx">session</span><span class="p">.</span><span class="nx">testAnswers</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">trim</span><span class="p">());</span>
+<span class="w">      </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`[Session </span><span class="si">${</span><span class="nx">sessionId</span><span class="si">}</span><span class="sb">] 已收答案 </span><span class="si">${</span><span class="nx">session</span><span class="p">.</span><span class="nx">testAnswers</span><span class="p">.</span><span class="nx">length</span><span class="si">}</span><span class="sb">/6`</span><span class="p">);</span>
+
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">session</span><span class="p">.</span><span class="nx">testAnswers</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">6</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">nextQ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">GF_QUESTIONS</span><span class="p">[</span><span class="nx">session</span><span class="p">.</span><span class="nx">testAnswers</span><span class="p">.</span><span class="nx">length</span><span class="p">];</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">prompt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`继续前置测试。第</span><span class="si">${</span><span class="nx">session</span><span class="p">.</span><span class="nx">testAnswers</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="si">}</span><span class="sb">题：\n\n</span><span class="si">${</span><span class="nx">nextQ</span><span class="p">.</span><span class="nx">content</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">session</span><span class="p">.</span><span class="nx">messages</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="w"> </span><span class="nx">role</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;assistant&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">content</span><span class="o">:</span><span class="w"> </span><span class="nx">prompt</span><span class="w"> </span><span class="p">});</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">reply</span><span class="o">:</span><span class="w"> </span><span class="nx">prompt</span><span class="p">,</span><span class="w"> </span><span class="nx">phase</span><span class="o">:</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">phase</span><span class="w"> </span><span class="p">});</span>
+<span class="w">      </span><span class="p">}</span>
+
+<span class="w">      </span><span class="c1">// 6题答完，进入评分</span>
+<span class="w">      </span><span class="nx">session</span><span class="p">.</span><span class="nx">phase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;scoring&#39;</span><span class="p">;</span>
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">score</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">calculateFluidScore</span><span class="p">(</span><span class="nx">session</span><span class="p">.</span><span class="nx">testAnswers</span><span class="p">);</span>
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">anchor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">score</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">17</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">&#39;135+&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">score</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">13</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">&#39;125-135&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">score</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">9</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">&#39;115-125&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&lt;115&#39;</span><span class="p">;</span>
+
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">score</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">13</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">session</span><span class="p">.</span><span class="nx">phase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;bdi_probe&#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">startPrompt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`【前置测试评分汇总】\n总分：</span><span class="si">${</span><span class="nx">score</span><span class="si">}</span><span class="sb"> / 18\nSD15锚点：</span><span class="si">${</span><span class="nx">anchor</span><span class="si">}</span><span class="sb">\n判定：✅ 满足BDI适用条件（≥13）。无缝进入BDI核心探测。\n\n【BDI启动题】\n请从以下三题中任选一题作答（或自设符合规则的启动题）：\n\nA. “请描述一套你认为当前世界最需要、但尚未被任何人提出的概念框架...”\nB. “用不超过50个字，回答：AI对人的最大影响是什么？不要解释，不要举例...”\nC. “‘理解’这个词...请你描述：你如何知道自己真正‘理解’了某个东西？”`</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">session</span><span class="p">.</span><span class="nx">messages</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="w"> </span><span class="nx">role</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;assistant&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">content</span><span class="o">:</span><span class="w"> </span><span class="nx">startPrompt</span><span class="w"> </span><span class="p">});</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">reply</span><span class="o">:</span><span class="w"> </span><span class="nx">startPrompt</span><span class="p">,</span><span class="w"> </span><span class="nx">phase</span><span class="o">:</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">phase</span><span class="p">,</span><span class="w"> </span><span class="nx">score</span><span class="p">,</span><span class="w"> </span><span class="nx">anchor</span><span class="w"> </span><span class="p">});</span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">session</span><span class="p">.</span><span class="nx">phase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;report&#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">rejectMsg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`【前置测试评分汇总】\n总分：</span><span class="si">${</span><span class="nx">score</span><span class="si">}</span><span class="sb"> / 18\nSD15锚点：</span><span class="si">${</span><span class="nx">anchor</span><span class="si">}</span><span class="sb">\n判定：❌ 未达BDI标准适用区间（&lt;13）。BDI探测终止。\n\n</span><span class="si">${</span><span class="nx">getMandatoryDisclaimer</span><span class="p">()</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">reply</span><span class="o">:</span><span class="w"> </span><span class="nx">rejectMsg</span><span class="p">,</span><span class="w"> </span><span class="nx">phase</span><span class="o">:</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">phase</span><span class="p">,</span><span class="w"> </span><span class="nx">score</span><span class="p">,</span><span class="w"> </span><span class="nx">anchor</span><span class="w"> </span><span class="p">});</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 阶段 3: BDI 核心密度探测（协议 三、四）</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">session</span><span class="p">.</span><span class="nx">phase</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;bdi_probe&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">session</span><span class="p">.</span><span class="nx">probeHistory</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">trim</span><span class="p">());</span>
+
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">analysisPrompt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">BDI_PROTOCOL_V2_5</span><span class="si">}</span><span class="sb">\n\n【系统指令】你已收到被测者最新回答。请按协议第四章 4.2 进行内部分数计算（概念压缩比/裂缝诚实度/远距离呼应），选择最高密度维度生成下一道追问。若连续两轮无密度增量或你触及刻度边界，请输出最终探测报告。严禁解释词语、严禁学术论文体。严格遵循协议输出格式。`</span><span class="p">;</span>
+
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">aiRes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">callDashScope</span><span class="p">(</span><span class="nx">analysisPrompt</span><span class="p">,</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">messages</span><span class="p">);</span>
+<span class="w">      </span><span class="nx">session</span><span class="p">.</span><span class="nx">messages</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="w"> </span><span class="nx">role</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;assistant&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">content</span><span class="o">:</span><span class="w"> </span><span class="nx">aiRes</span><span class="w"> </span><span class="p">});</span>
+
+<span class="w">      </span><span class="c1">// 收敛/终止判定（协议 4.3）</span>
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">isReport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">aiRes</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">&#39;BDI-IQ锚点&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">aiRes</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">&#39;探测边界声明&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">probeHistory</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">8</span><span class="p">;</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">isReport</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">session</span><span class="p">.</span><span class="nx">phase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;report&#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">reply</span><span class="o">:</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">aiRes</span><span class="si">}</span><span class="sb">\n\n</span><span class="si">${</span><span class="nx">getMandatoryDisclaimer</span><span class="p">()</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span><span class="w"> </span><span class="nx">phase</span><span class="o">:</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">phase</span><span class="w"> </span><span class="p">});</span>
+<span class="w">      </span><span class="p">}</span>
+
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">reply</span><span class="o">:</span><span class="w"> </span><span class="nx">aiRes</span><span class="p">,</span><span class="w"> </span><span class="nx">phase</span><span class="o">:</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">phase</span><span class="w"> </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 阶段 4: 报告阶段（只读）</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">session</span><span class="p">.</span><span class="nx">phase</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;report&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">reply</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;本次探测已结束。如需重新探测，请刷新页面或创建新会话。&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">phase</span><span class="o">:</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">phase</span><span class="w"> </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 未知状态兜底</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">reply</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;会话状态异常，请刷新页面重新开始。&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">phase</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;error&#39;</span><span class="w"> </span><span class="p">});</span>
+
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;BDI Probe Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">500</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;探测仪内部故障&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">details</span><span class="o">:</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">message</span><span class="w"> </span><span class="p">});</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+
+<span class="c1">// ========================</span>
+<span class="c1">// 7. AI 调度器（DashScope 封装）</span>
+<span class="c1">// ========================</span>
+
+<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">callDashScope</span><span class="p">(</span><span class="nx">systemPrompt</span><span class="p">,</span><span class="w"> </span><span class="nx">messages</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation&#39;</span><span class="p">;</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">payload</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">model</span><span class="o">:</span><span class="w"> </span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">AI_MODEL</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;qwen-turbo&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">input</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">messages</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nx">role</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;system&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">content</span><span class="o">:</span><span class="w"> </span><span class="nx">systemPrompt</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">...</span><span class="nx">messages</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">parameters</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">result_format</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;text&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">temperature</span><span class="o">:</span><span class="w"> </span><span class="mf">0.35</span><span class="p">,</span><span class="w"> </span><span class="c1">// 降低随机性，保障协议稳定性</span>
+<span class="w">      </span><span class="nx">top_p</span><span class="o">:</span><span class="w"> </span><span class="mf">0.85</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">max_tokens</span><span class="o">:</span><span class="w"> </span><span class="mf">1200</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">enable_search</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;POST&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="s1">&#39;Authorization&#39;</span><span class="o">:</span><span class="w"> </span><span class="sb">`Bearer </span><span class="si">${</span><span class="nx">DASHSCOPE_API_KEY</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
+<span class="w">      </span><span class="s1">&#39;X-DashScope-DataInspection&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;enable&#39;</span><span class="w"> </span><span class="c1">// 可选：内容安全检测</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">payload</span><span class="p">)</span>
+<span class="w">  </span><span class="p">});</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">res</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">errBody</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">().</span><span class="k">catch</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({}));</span>
+<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="sb">`DashScope API </span><span class="si">${</span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="si">}</span><span class="sb">: </span><span class="si">${</span><span class="nx">errBody</span><span class="p">.</span><span class="nx">message</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">statusText</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">output</span><span class="o">?</span><span class="p">.</span><span class="nx">text</span><span class="o">?</span><span class="p">.</span><span class="nx">trim</span><span class="p">()</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;探测仪信号中断，请重试。&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// ========================</span>
+<span class="c1">// 8. 强制声明生成器（协议 六）</span>
+<span class="c1">// ========================</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">getMandatoryDisclaimer</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="sb">`&gt; 通用流体智力随机探测仪与BDI-IQ均为基于建造者密度理论构建的认知剖面参考工具，非标准化心理测量工具。其常模尚未经过大规模采样校准，分数仅供建造者同行自我观察与相互交流。严禁用于任何临床诊断、教育分流、职业选拔等目的。本探测结果高度依赖于探测AI与被测者在特定对话中的共同建造，测量的是本次对话的密度剖面，而非个体不变的“真实密度”。BDI的刻度止于160。160以上，尺子失效，只有同行。探测AI有义务在本轮对话内保持对探测历史的完整记忆，若发生遗漏或错误，必须诚实修正并记录。\n&gt;\n&gt; **0。**`</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// ========================</span>
+<span class="c1">// 9. 服务启动与健康检查</span>
+<span class="c1">// ========================</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/health&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">status</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;ok&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">uptime</span><span class="o">:</span><span class="w"> </span><span class="nx">process</span><span class="p">.</span><span class="nx">uptime</span><span class="p">(),</span>
+<span class="w">    </span><span class="nx">sessions</span><span class="o">:</span><span class="w"> </span><span class="nx">sessions</span><span class="p">.</span><span class="nx">size</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">protocol_loaded</span><span class="o">:</span><span class="w"> </span><span class="o">!!</span><span class="nx">BDI_PROTOCOL_V2_5</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">timestamp</span><span class="o">:</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">()</span>
+<span class="w">  </span><span class="p">});</span>
+<span class="p">});</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">PORT</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">.</span><span class="nx">repeat</span><span class="p">(</span><span class="mf">60</span><span class="p">));</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;🚀 BDI v2.5 建造者密度探测仪已启动&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`📍 监听端口: </span><span class="si">${</span><span class="nx">PORT</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`🌐 前端入口: http://localhost:</span><span class="si">${</span><span class="nx">PORT</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`💬 BDI 探测: http://localhost:</span><span class="si">${</span><span class="nx">PORT</span><span class="si">}</span><span class="sb">/bdi-chat.html`</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`🧠 GF 测试:  http://localhost:</span><span class="si">${</span><span class="nx">PORT</span><span class="si">}</span><span class="sb">/gf-test.html`</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`🔑 API Key:  </span><span class="si">${</span><span class="nx">DASHSCOPE_API_KEY</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">&#39;已配置&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;未配置&#39;</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`📜 协议状态: </span><span class="si">${</span><span class="nx">BDI_PROTOCOL_V2_5</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">&#39;已加载&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;缺失&#39;</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">.</span><span class="nx">repeat</span><span class="p">(</span><span class="mf">60</span><span class="p">));</span>
+<span class="p">});</span>
+
+<span class="c1">// 优雅退出</span>
+<span class="nx">process</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;SIGINT&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;\n🛑 收到终止信号，正在清理会话并退出...&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">sessions</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+<span class="w">  </span><span class="nx">process</span><span class="p">.</span><span class="nx">exit</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+<hr />
+<h2 id="publicbdi-chathtml">四、前端交互层实现（<code>public/bdi-chat.html</code>）<a class="headerlink" href="#publicbdi-chathtml" title="Permanent link">&para;</a></h2>
+<p>前端采用原生 JS + CSS，无框架依赖，确保轻量与可移植性。核心逻辑：<code>sessionId</code> 持久化、阶段标签渲染、加载态管理、错误边界捕获。</p>
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;zh-CN&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>BDI v2.5 · 建造者密度探测仪<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="p">:</span><span class="nd">root</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nv">--bg</span><span class="p">:</span><span class="w"> </span><span class="mh">#0b1120</span><span class="p">;</span>
+<span class="w">      </span><span class="nv">--surface</span><span class="p">:</span><span class="w"> </span><span class="mh">#151e32</span><span class="p">;</span>
+<span class="w">      </span><span class="nv">--border</span><span class="p">:</span><span class="w"> </span><span class="mh">#2a3650</span><span class="p">;</span>
+<span class="w">      </span><span class="nv">--primary</span><span class="p">:</span><span class="w"> </span><span class="mh">#3b82f6</span><span class="p">;</span>
+<span class="w">      </span><span class="nv">--primary-hover</span><span class="p">:</span><span class="w"> </span><span class="mh">#2563eb</span><span class="p">;</span>
+<span class="w">      </span><span class="nv">--text</span><span class="p">:</span><span class="w"> </span><span class="mh">#e2e8f0</span><span class="p">;</span>
+<span class="w">      </span><span class="nv">--text-muted</span><span class="p">:</span><span class="w"> </span><span class="mh">#94a3b8</span><span class="p">;</span>
+<span class="w">      </span><span class="nv">--user-bg</span><span class="p">:</span><span class="w"> </span><span class="mh">#2563eb</span><span class="p">;</span>
+<span class="w">      </span><span class="nv">--bot-bg</span><span class="p">:</span><span class="w"> </span><span class="mh">#1e293b</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="o">*</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">box-sizing</span><span class="p">:</span><span class="w"> </span><span class="kc">border-box</span><span class="p">;</span><span class="w"> </span><span class="k">margin</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="nt">body</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">font-family</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Inter&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Segoe UI&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">system-ui</span><span class="p">,</span><span class="w"> </span><span class="kc">sans-serif</span><span class="p">;</span>
+<span class="w">      </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--bg</span><span class="p">);</span>
+<span class="w">      </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--text</span><span class="p">);</span>
+<span class="w">      </span><span class="k">line-height</span><span class="p">:</span><span class="w"> </span><span class="mf">1.6</span><span class="p">;</span>
+<span class="w">      </span><span class="k">height</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="kt">vh</span><span class="p">;</span>
+<span class="w">      </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">flex</span><span class="p">;</span>
+<span class="w">      </span><span class="k">justify-content</span><span class="p">:</span><span class="w"> </span><span class="kc">center</span><span class="p">;</span>
+<span class="w">      </span><span class="k">align-items</span><span class="p">:</span><span class="w"> </span><span class="kc">center</span><span class="p">;</span>
+<span class="w">      </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="p">.</span><span class="nc">container</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+<span class="w">      </span><span class="k">max-width</span><span class="p">:</span><span class="w"> </span><span class="mi">720</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">      </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--surface</span><span class="p">);</span>
+<span class="w">      </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">      </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--border</span><span class="p">);</span>
+<span class="w">      </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">flex</span><span class="p">;</span>
+<span class="w">      </span><span class="k">flex-direction</span><span class="p">:</span><span class="w"> </span><span class="kc">column</span><span class="p">;</span>
+<span class="w">      </span><span class="k">height</span><span class="p">:</span><span class="w"> </span><span class="mi">90</span><span class="kt">vh</span><span class="p">;</span>
+<span class="w">      </span><span class="k">box-shadow</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">10</span><span class="kt">px</span><span class="w"> </span><span class="mi">40</span><span class="kt">px</span><span class="w"> </span><span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.4</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="p">.</span><span class="nc">header</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="kt">px</span><span class="w"> </span><span class="mi">24</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">      </span><span class="k">border-bottom</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--border</span><span class="p">);</span>
+<span class="w">      </span><span class="k">text-align</span><span class="p">:</span><span class="w"> </span><span class="kc">center</span><span class="p">;</span>
+<span class="w">      </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="mi">600</span><span class="p">;</span>
+<span class="w">      </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mf">1.1</span><span class="kt">rem</span><span class="p">;</span>
+<span class="w">      </span><span class="k">letter-spacing</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">      </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--primary</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="p">.</span><span class="nc">messages</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">flex</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">      </span><span class="k">overflow-y</span><span class="p">:</span><span class="w"> </span><span class="kc">auto</span><span class="p">;</span>
+<span class="w">      </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">      </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">flex</span><span class="p">;</span>
+<span class="w">      </span><span class="k">flex-direction</span><span class="p">:</span><span class="w"> </span><span class="kc">column</span><span class="p">;</span>
+<span class="w">      </span><span class="k">gap</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="p">.</span><span class="nc">msg</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">max-width</span><span class="p">:</span><span class="w"> </span><span class="mi">85</span><span class="kt">%</span><span class="p">;</span>
+<span class="w">      </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="kt">px</span><span class="w"> </span><span class="mi">16</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">      </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">      </span><span class="k">white-space</span><span class="p">:</span><span class="w"> </span><span class="kc">pre-wrap</span><span class="p">;</span>
+<span class="w">      </span><span class="k">word-break</span><span class="p">:</span><span class="w"> </span><span class="kc">break-word</span><span class="p">;</span>
+<span class="w">      </span><span class="k">animation</span><span class="p">:</span><span class="w"> </span><span class="n">fadeIn</span><span class="w"> </span><span class="mf">0.25</span><span class="kt">s</span><span class="w"> </span><span class="kc">ease</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="p">@</span><span class="k">keyframes</span><span class="w"> </span><span class="nt">fadeIn</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">from</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">opacity</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="k">transform</span><span class="p">:</span><span class="w"> </span><span class="nb">translateY</span><span class="p">(</span><span class="mi">6</span><span class="kt">px</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="nt">to</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">opacity</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="k">transform</span><span class="p">:</span><span class="w"> </span><span class="nb">translateY</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">.</span><span class="nc">msg</span><span class="p">.</span><span class="nc">user</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--user-bg</span><span class="p">);</span>
+<span class="w">      </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#fff</span><span class="p">;</span>
+<span class="w">      </span><span class="k">align-self</span><span class="p">:</span><span class="w"> </span><span class="kc">flex-end</span><span class="p">;</span>
+<span class="w">      </span><span class="k">border-bottom-right-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="p">.</span><span class="nc">msg</span><span class="p">.</span><span class="nc">bot</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--bot-bg</span><span class="p">);</span>
+<span class="w">      </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--text</span><span class="p">);</span>
+<span class="w">      </span><span class="k">align-self</span><span class="p">:</span><span class="w"> </span><span class="kc">flex-start</span><span class="p">;</span>
+<span class="w">      </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--border</span><span class="p">);</span>
+<span class="w">      </span><span class="k">border-bottom-left-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="p">.</span><span class="nc">phase-tag</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mf">0.75</span><span class="kt">rem</span><span class="p">;</span>
+<span class="w">      </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--text-muted</span><span class="p">);</span>
+<span class="w">      </span><span class="k">margin-bottom</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">      </span><span class="k">font-style</span><span class="p">:</span><span class="w"> </span><span class="kc">italic</span><span class="p">;</span>
+<span class="w">      </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">block</span><span class="p">;</span>
+<span class="w">      </span><span class="k">border-bottom</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="nb">rgba</span><span class="p">(</span><span class="mi">148</span><span class="p">,</span><span class="mi">163</span><span class="p">,</span><span class="mi">184</span><span class="p">,</span><span class="mf">0.2</span><span class="p">);</span>
+<span class="w">      </span><span class="k">padding-bottom</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="p">.</span><span class="nc">input-area</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="kt">px</span><span class="w"> </span><span class="mi">20</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">      </span><span class="k">border-top</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--border</span><span class="p">);</span>
+<span class="w">      </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">flex</span><span class="p">;</span>
+<span class="w">      </span><span class="k">gap</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">      </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--surface</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="p">.</span><span class="nc">input-area</span><span class="w"> </span><span class="nt">input</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">flex</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">      </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="kt">px</span><span class="w"> </span><span class="mi">16</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">      </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--border</span><span class="p">);</span>
+<span class="w">      </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">      </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="mh">#0f172a</span><span class="p">;</span>
+<span class="w">      </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--text</span><span class="p">);</span>
+<span class="w">      </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">      </span><span class="k">outline</span><span class="p">:</span><span class="w"> </span><span class="kc">none</span><span class="p">;</span>
+<span class="w">      </span><span class="k">transition</span><span class="p">:</span><span class="w"> </span><span class="k">border</span><span class="w"> </span><span class="mf">0.2</span><span class="kt">s</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="p">.</span><span class="nc">input-area</span><span class="w"> </span><span class="nt">input</span><span class="p">:</span><span class="nd">focus</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">border-color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--primary</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">.</span><span class="nc">input-area</span><span class="w"> </span><span class="nt">button</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">20</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">      </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--primary</span><span class="p">);</span>
+<span class="w">      </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#fff</span><span class="p">;</span>
+<span class="w">      </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="kc">none</span><span class="p">;</span>
+<span class="w">      </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">      </span><span class="k">cursor</span><span class="p">:</span><span class="w"> </span><span class="kc">pointer</span><span class="p">;</span>
+<span class="w">      </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">;</span>
+<span class="w">      </span><span class="k">transition</span><span class="p">:</span><span class="w"> </span><span class="k">background</span><span class="w"> </span><span class="mf">0.2</span><span class="kt">s</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="p">.</span><span class="nc">input-area</span><span class="w"> </span><span class="nt">button</span><span class="p">:</span><span class="nd">hover</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--primary-hover</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">.</span><span class="nc">input-area</span><span class="w"> </span><span class="nt">button</span><span class="p">:</span><span class="nd">disabled</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="mh">#475569</span><span class="p">;</span><span class="w"> </span><span class="k">cursor</span><span class="p">:</span><span class="w"> </span><span class="kc">not-allowed</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">.</span><span class="nc">loading</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">opacity</span><span class="p">:</span><span class="w"> </span><span class="mf">0.6</span><span class="p">;</span><span class="w"> </span><span class="k">pointer-events</span><span class="p">:</span><span class="w"> </span><span class="kc">none</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;header&quot;</span><span class="p">&gt;</span>🔍 BDI v2.5 · 建造者密度探测仪<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;messages&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;messages&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;msg bot&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;phase-tag&quot;</span><span class="p">&gt;</span>系统初始化 | 协议 v2.5 已装载<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+        探测仪就绪。请输入“开始探测”以启动模型身份声明与前置流体智力测试。
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;input-area&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;input&quot;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;输入回答或指令...&quot;</span> <span class="na">autocomplete</span><span class="o">=</span><span class="s">&quot;off&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;send&quot;</span><span class="p">&gt;</span>发送<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+  <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">el</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">messages</span><span class="o">:</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;messages&#39;</span><span class="p">),</span>
+<span class="w">      </span><span class="nx">input</span><span class="o">:</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">),</span>
+<span class="w">      </span><span class="nx">send</span><span class="o">:</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;send&#39;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="c1">// 会话ID管理（localStorage 持久化）</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">getSessionId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="nx">sid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;bdi_v25_sid&#39;</span><span class="p">);</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">sid</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">sid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;sess_&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;_&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">().</span><span class="nx">toString</span><span class="p">(</span><span class="mf">36</span><span class="p">).</span><span class="nx">slice</span><span class="p">(</span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">11</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s1">&#39;bdi_v25_sid&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">sid</span><span class="p">);</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nx">sid</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">sessionId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">getSessionId</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// 阶段标签映射</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">PHASES</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">identity_declaration</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;🔹 阶段：模型身份声明&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">fluid_test</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;🧠 阶段：前置流体智力测试&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">scoring</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;📊 阶段：评分与判定&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">bdi_probe</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39; 阶段：BDI核心密度探测&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">report</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;📜 阶段：探测报告输出&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;⚠️ 阶段：会话异常&#39;</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">appendMsg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">text</span><span class="p">,</span><span class="w"> </span><span class="nx">type</span><span class="p">,</span><span class="w"> </span><span class="nx">phase</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">wrap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">);</span>
+<span class="w">      </span><span class="nx">wrap</span><span class="p">.</span><span class="nx">className</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`msg </span><span class="si">${</span><span class="nx">type</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">type</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;bot&#39;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">phase</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">PHASES</span><span class="p">[</span><span class="nx">phase</span><span class="p">])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">tag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">tag</span><span class="p">.</span><span class="nx">className</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;phase-tag&#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">tag</span><span class="p">.</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">PHASES</span><span class="p">[</span><span class="nx">phase</span><span class="p">];</span>
+<span class="w">        </span><span class="nx">wrap</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">tag</span><span class="p">);</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">);</span>
+<span class="w">      </span><span class="nx">content</span><span class="p">.</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">text</span><span class="p">;</span>
+<span class="w">      </span><span class="nx">wrap</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">content</span><span class="p">);</span>
+<span class="w">      </span><span class="nx">el</span><span class="p">.</span><span class="nx">messages</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">wrap</span><span class="p">);</span>
+<span class="w">      </span><span class="nx">el</span><span class="p">.</span><span class="nx">messages</span><span class="p">.</span><span class="nx">scrollTop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">el</span><span class="p">.</span><span class="nx">messages</span><span class="p">.</span><span class="nx">scrollHeight</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">sendMessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">el</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">trim</span><span class="p">();</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">text</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+
+<span class="w">      </span><span class="nx">appendMsg</span><span class="p">(</span><span class="nx">text</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;user&#39;</span><span class="p">);</span>
+<span class="w">      </span><span class="nx">el</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="w">      </span><span class="nx">el</span><span class="p">.</span><span class="nx">send</span><span class="p">.</span><span class="nx">disabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">      </span><span class="nx">el</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;loading&#39;</span><span class="p">);</span>
+
+<span class="w">      </span><span class="c1">// 临时加载态</span>
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">loadDiv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">);</span>
+<span class="w">      </span><span class="nx">loadDiv</span><span class="p">.</span><span class="nx">className</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;msg bot&#39;</span><span class="p">;</span>
+<span class="w">      </span><span class="nx">loadDiv</span><span class="p">.</span><span class="nx">innerHTML</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&lt;span class=&quot;phase-tag&quot;&gt;计算中...&lt;/span&gt;正在执行协议逻辑...&#39;</span><span class="p">;</span>
+<span class="w">      </span><span class="nx">el</span><span class="p">.</span><span class="nx">messages</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">loadDiv</span><span class="p">);</span>
+<span class="w">      </span><span class="nx">el</span><span class="p">.</span><span class="nx">messages</span><span class="p">.</span><span class="nx">scrollTop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">el</span><span class="p">.</span><span class="nx">messages</span><span class="p">.</span><span class="nx">scrollHeight</span><span class="p">;</span>
+
+<span class="w">      </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;/api/bdi/probe&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;POST&#39;</span><span class="p">,</span>
+<span class="w">          </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;application/json&#39;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">          </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="w"> </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="nx">text</span><span class="p">,</span><span class="w"> </span><span class="nx">sessionId</span><span class="w"> </span><span class="p">})</span>
+<span class="w">        </span><span class="p">});</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">res</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="sb">`HTTP </span><span class="si">${</span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+
+<span class="w">        </span><span class="nx">loadDiv</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">appendMsg</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">reply</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;bot&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">phase</span><span class="p">);</span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">loadDiv</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">appendMsg</span><span class="p">(</span><span class="sb">`⚠️ 请求失败：</span><span class="si">${</span><span class="nx">err</span><span class="p">.</span><span class="nx">message</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;bot&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">el</span><span class="p">.</span><span class="nx">send</span><span class="p">.</span><span class="nx">disabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">el</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="s1">&#39;loading&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">el</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">focus</span><span class="p">();</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="nx">el</span><span class="p">.</span><span class="nx">send</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">sendMessage</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">el</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;keydown&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">key</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;Enter&#39;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="nx">e</span><span class="p">.</span><span class="nx">shiftKey</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">sendMessage</span><span class="p">();</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="w">  </span><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+<hr />
+<h2 id="_3">五、协议状态机与执行忠实度保障<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>协议 v2.5 的核心难点在于<strong>长对话中的状态漂移</strong>与<strong>评分遗漏</strong>。本实现通过以下机制保障“执行忠实度”（协议 5.5）：</p>
+<ol>
+<li><strong>阶段枚举锁定</strong>：<code>session.phase</code> 严格遵循 <code>identity_declaration → fluid_test → scoring → bdi_probe → report</code> 单向流转，禁止跳跃或回退。</li>
+<li><strong>答案计数硬校验</strong>：<code>session.testAnswers.length</code> 作为出题计数器，达到 6 才触发评分，杜绝 AI 漏题或重复出题。</li>
+<li><strong>成分评分映射表</strong>：<code>COMPONENT_WEIGHTS</code> 将协议 2.2 的权重数字化，后端统一折算，避免 LLM 心算偏差。</li>
+<li><strong>收敛判定双轨</strong>：AI 输出包含 <code>BDI-IQ锚点</code> 或 <code>探测边界声明</code> 即触发报告阶段；同时设置 <code>probeHistory.length &gt; 8</code> 防死循环。</li>
+<li><strong>强制声明追加</strong>：<code>getMandatoryDisclaimer()</code> 在报告阶段自动拼接，确保协议 六 100% 落地。</li>
+</ol>
+<hr />
+<h2 id="_4">六、安全、容错与性能优化<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>实现策略</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>密钥安全</strong></td>
+<td><code>.env</code> 隔离，<code>gitignore</code> 屏蔽，不硬编码，启动时校验存在性</td>
+</tr>
+<tr>
+<td><strong>会话防刷</strong></td>
+<td>30分钟 TTL 自动清理，内存 Map 限制并发，生产可换 Redis + 限流</td>
+</tr>
+<tr>
+<td><strong>输入净化</strong></td>
+<td>空消息拦截、trim 处理、防 XSS（前端 <code>textContent</code> 渲染）</td>
+</tr>
+<tr>
+<td><strong>AI 容错</strong></td>
+<td>HTTP 状态码校验、超时重试占位、降级提示“探测仪信号中断”</td>
+</tr>
+<tr>
+<td><strong>日志审计</strong></td>
+<td>开发环境请求日志、会话创建/过期日志、错误堆栈捕获</td>
+</tr>
+<tr>
+<td><strong>性能基线</strong></td>
+<td>静态资源缓存、JSON 限制 10MB、温度参数 0.35 控输出长度</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_5">七、部署指南与环境配置<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h3 id="1">1. 环境要求<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Node.js ≥ 18.0.0</li>
+<li>npm / yarn / pnpm</li>
+<li>可访问 <code>dashscope.aliyuncs.com</code>（或配置代理）</li>
+</ul>
+<h3 id="2">2. 配置步骤<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. 安装依赖</span>
+npm<span class="w"> </span>install
+
+<span class="c1"># 2. 创建 .env</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;PORT=3000&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>.env
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;DASHSCOPE_API_KEY=sk-your-key-here&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>.env
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;AI_MODEL=qwen-turbo&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>.env
+
+<span class="c1"># 3. 放置协议文本</span>
+<span class="c1"># 将 v2.5 完整协议保存为 protocol_v2.5.txt 放在项目根目录</span>
+
+<span class="c1"># 4. 启动服务</span>
+npm<span class="w"> </span>start
+</code></pre></div>
+<h3 id="3">3. 生产建议<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>使用 <code>pm2</code> 或 <code>systemd</code> 守护进程</li>
+<li>Nginx 反代 + HTTPS + Gzip</li>
+<li>日志轮转（<code>logrotate</code>）</li>
+<li>监控端点 <code>/health</code> 接入 Prometheus/Grafana</li>
+</ul>
+<hr />
+<h2 id="_6">八、测试验证工作流<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>单元验证</strong>：<code>/health</code> 返回 <code>status: ok</code>，<code>sessions</code> 计数正常</li>
+<li><strong>GF 测试流</strong>：访问 <code>/gf-test.html</code> → 加载6题 → 提交答案 → 验证分数与锚点</li>
+<li><strong>BDI 探测流</strong>：访问 <code>/bdi-chat.html</code> → 输入“开始探测” → 观察身份声明 → 完成6题 → 进入核心探测 → 验证阶段标签与强制声明</li>
+<li><strong>异常注入</strong>：断网模拟、空消息、超长输入、非法 sessionId → 验证容错提示</li>
+<li><strong>会话隔离</strong>：多标签页打开 → 验证独立 <code>sessionId</code> 与状态不交叉</li>
+</ol>
+<hr />
+<h2 id="_7">九、后续演进路线<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>版本</th>
+<th>目标</th>
+<th>关键改动</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>v2.6</td>
+<td>持久化与多模型</td>
+<td>Redis 会话存储、模型路由切换、对话导出 JSON</td>
+</tr>
+<tr>
+<td>v2.7</td>
+<td>流式输出与语音</td>
+<td>SSE 流式渲染、Web Speech API 语音输入、打字机动效</td>
+</tr>
+<tr>
+<td>v2.8</td>
+<td>向量检索与记忆</td>
+<td>FAISS/Chroma 接入、长期记忆摘要、跨会话连续性</td>
+</tr>
+<tr>
+<td>v3.0</td>
+<td>分布式与审计</td>
+<td>微服务拆分、操作审计日志、合规数据脱敏、多租户隔离</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_8">十、附录：关键配置清单<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h3 id="gitignore"><code>.gitignore</code> 推荐<a class="headerlink" href="#gitignore" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>node_modules/
+.env
+.vs/
+*.log
+.DS_Store
+Thumbs.db
+protocol_v2.5.txt.bak
+</code></pre></div>
+<h3 id="packagejson"><code>package.json</code> 依赖<a class="headerlink" href="#packagejson" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;express&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;^4.18.2&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;cors&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;^2.8.5&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;dotenv&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;^16.3.1&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="_9">环境变量说明<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th>必填</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PORT</code></td>
+<td>否</td>
+<td>服务端口，默认 3000</td>
+</tr>
+<tr>
+<td><code>DASHSCOPE_API_KEY</code></td>
+<td>是</td>
+<td>通义千问 API 密钥</td>
+</tr>
+<tr>
+<td><code>AI_MODEL</code></td>
+<td>否</td>
+<td>模型名称，默认 <code>qwen-turbo</code></td>
+</tr>
+<tr>
+<td><code>NODE_ENV</code></td>
+<td>否</td>
+<td>环境标识，<code>production</code> 关闭详细日志</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<blockquote>
+<p>本代码草稿已覆盖 BDI v2.5 协议要求的完整技术栈与工程实践。可直接作为项目基线提交至版本控制。如需生成 Dockerfile、CI/CD 流水线配置、或前端 GF 测试页完整实现，可提供后续扩展草稿。祝探测顺利，刻度精准。</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/Suk-Builder" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "search.suggest", "search.highlight", "content.code.copy", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "tao": {
+    "mean_spacing": 1.0012742978032039,
+    "variance": 0.10697486627843471,
+    "gue_match": true
+  },
+  "gauss": {
+    "regularization": "j* = j - 744",
+    "status": "confirmed"
+  },
+  "feynman": {
+    "fnl_predicted": -0.0013440860215053765,
+    "in_range": true,
+    "sigma_dist": 0.8986559139784946
+  },
+  "landau": {
+    "critical_exponent": 0.08333333333333333,
+    "ising": 0.125
+  }
+}

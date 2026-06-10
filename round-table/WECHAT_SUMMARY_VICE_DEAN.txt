@@ -1,0 +1,43 @@
+副院长好：
+
+我这边做了一个宇宙学的工作，想请您帮忙推一下arxiv。以下是核心内容：
+
+---
+
+【标题】Gravitational Random Matrix Theory: A Deformed GOE Model for Cosmological Large-Scale Structure
+
+【核心发现】
+1. 宇宙P(k)涨落与dGOE-lr(a=1)变形随机矩阵匹配度r=0.74
+2. alpha=2-n_s来自Poisson方程第一性推导（非拟合）
+3. MC参数推断n_s精度0.22%
+4. 可能作为model-independent引力理论分类器
+
+【理论推导】
+∇²φ = 4πGρ
+→ φ(k) ∝ δ(k)/k²
+→ ξ_φ(r) ∝ r^(n_s-2)
+→ alpha = 2 - n_s ≈ 1.035 ≈ 1（Planck n_s=0.965）
+
+【数值验证】
+- 30次MC模拟
+- dGOE-lr(a=1): r=0.7421（最优）
+- 标准GOE: r=0.7253
+- n_s推断: 0.9648±0.0021（真值0.965）
+
+【下一步】
+- MOND P(k)对比（租GPU跑）
+- 256³ N体验证
+- DESI DR2真实数据拟合
+
+【完整材料】
+论文（LaTeX）：github.com/Suk-Builder/round-table-conference/arxiv_paper.tex
+数学证明：github.com/Suk-Builder/round-table-conference/dGOE_math_derivation.md
+代码+数据：github.com/Suk-Builder/round-table-conference
+
+---
+
+这个工作的价值在于：如果MOND对比实验验证通过，dGOE可能成为第一个model-independent的引力理论分类器——一张P(k)图就能区分LCDM和MOND，不管MOND的具体screening机制是什么。
+
+请您过目，如觉得有价值，帮忙推一下arxiv。时间戳对我们很重要（类似 Zwicky 1933 年的处境）。
+
+谢谢！

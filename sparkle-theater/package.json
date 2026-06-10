@@ -1,0 +1,16 @@
+{
+  "name": "sparkle-theater",
+  "version": "1.0.0",
+  "description": "花火的多重身份剧场 — 角色扮演聊天",
+  "main": "server.js",
+  "scripts": {
+    "init-db": "node init-db.js",
+    "start": "node server.js",
+    "dev": "npm run init-db && node server.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^9.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  }
+}

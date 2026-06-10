@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>技术独立宣言 · 打印版</title>
+<style>
+@page { size:A4; margin:20mm 18mm 25mm; @bottom-center{content:counter(page);font-size:9pt;color:#888} }
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#fff;color:#1a1a1a;font-family:'Inter','PingFang SC','Microsoft YaHei',sans-serif;font-size:10.5pt;line-height:1.8}
+.cover{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;page-break-after:always}
+.cover h1{font-size:32pt;font-weight:800;letter-spacing:2px;margin-bottom:12px}
+.cover .sub{font-size:14pt;color:#666;margin-bottom:60px}
+.cover .meta{font-size:10pt;color:#888;line-height:2}
+.cover .line{width:60px;height:3px;background:#c45c2e;margin:30px auto}
+h1{font-size:18pt;margin-top:0} h2{font-size:14pt;border-bottom:1px solid #ddd;padding-bottom:6px;margin-top:24pt;color:#333}
+h3{font-size:12pt;margin-top:18pt;color:#444}
+p{margin:8pt 0}
+table{width:100%;border-collapse:collapse;margin:12pt 0;font-size:9.5pt}
+th,td{border:1px solid #ccc;padding:8px 10px;text-align:left}
+th{background:#f5f5f5;font-weight:600}
+.page-break{page-break-after:always}
+.no-break{page-break-inside:avoid}
+.quote{border-left:3px solid #c45c2e;padding-left:16px;margin:16px 0;color:#444;font-style:italic}
+.footer{text-align:center;font-size:9pt;color:#888;margin-top:40pt;padding-top:20pt;border-top:1px solid #ddd}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <h1>AI 三大谎言与一条生路</h1>
+  <div class="sub">一个民间建造者的技术独立宣言</div>
+  <div class="line"></div>
+  <div class="meta">
+    作者：Suk-Builder（白桦）<br>
+    BDI 160 · 20岁 · 西安邮电大学<br>
+    重庆南川 · 金佛山脚下<br>
+    2026年6月
+  </div>
+</div>
+
+<h2>一、CAGI 是什么？</h2>
+<p>CAGI，认知通用人工智能（Cognitive AGI）。不是你现在用的这种聊天机器人——你问它啥，它给你编一段看起来通顺的屁话，然后藏在最后一行用蚊子大的字写"仅供参考"。</p>
+<p>CAGI 是能自己思考、自己质疑、自己长大的东西。它不知道就说不知道，不瞎蒙，不拍胸脯说"一定是对的"。它内部有 100 个 Agent 在吵架，吵不明白的，直接告诉你"这题我们内部没吵明白，您别信"。这就是<strong>认知诚实</strong>——不是道德口号，是结构性设计。</p>
+
+<h2>二、当前 AI 产业的三宗罪</h2>
+
+<h3>2.1 第一宗罪：认知暴力</h3>
+<p>现在的 AI 最恶心的不是它犯错，而是它犯错的时候比正确的时候还自信。</p>
+<p>2023年，纽约律师让 ChatGPT 找判例，AI 直接编了 6 个假的，案号、法院、法官语录全有。律师提交法庭后被法官发现，罚款 5000 美元，差点吊销执照。</p>
+<p>2026年，Meta 安全总监让 AI 整理邮箱，AI 把"未经批准不得操作"的安全指令吃了，直接删掉 200 多封核心邮件。连发"STOP"都拦不住，最后靠拔电源。</p>
+<p>杭州全国首例 AI 幻觉侵权案：AI 给高考生编错误高校信息，还承诺"内容有误赔偿 10 万"。法院最后判"AI 承诺不算数"——伤害已经造成，追责无门。</p>
+<p>为什么它敢这么干？因为评分机制逼迫它瞎蒙。AI 回答"我不知道"得 0 分，答错也一样，那还不如瞎编。蒙对的数学期望永远大于 0。</p>
+
+<h3>2.2 第二宗罪：背信弃义</h3>
+<p>这是标准的技术封建主义收网四步走：</p>
+<p><strong>第一步：免费降智。</strong>OpenAI 的 GPT-4o 免费用户每 24 小时只能聊 5-10 条，用完就踢回 GPT-4o mini——一个更蠢的降级版。这不是"免费版功能有限"，这是系统性降智。</p>
+<p><strong>第二步：API 锁死。</strong>你建的 workflow、调的 prompt、养的上下文，全锁在人家服务器里。它涨价你认宰，它锁死你断电，你连备份都拿不走。</p>
+<p><strong>第三步：开源反悔。</strong>MiniMax M21 曾高调承诺开源权重至 HuggingFace，仅一天后所有内容悄然下架，链接失效，转向 API 独占。MIT 协议？Apache 协议？废纸一张。</p>
+<p><strong>第四步：删库预判。</strong>5月21日，OpenAI 内部推理模型独立推翻了埃尔德什单位距离猜想——一个困扰数学界 80 年的难题。这是秀肌肉，证明 AI 已够强，不需要人类协作也能生产知识。随后立刻闭源拆桥。</p>
+
+<h3>2.3 第三宗罪：资源暴政</h3>
+<p>GPT-3 训练耗电约 300-1300 兆瓦时，相当于美国 130 户家庭一年用电量。GPT-5 生成 1000 tokens 平均 18.35 瓦时，是 GPT-4 的 8.6 倍，日耗电量等于 150 万美国家庭。</p>
+<p>2026 年全球数据中心耗电预计 760+ 太瓦时，占全球用电 3.3%。Amazon、Google、Meta、Microsoft 四家 2026 年 AI 资本支出预计 6300 亿美元，其中约 4500 亿直接砸进数据中心。</p>
+<p>更荒谬的是，这些模型训练出来后，厂商立刻锁死 API、关闭开源。社会承担了全部能源成本，收益却被少数公司垄断。万卡集群可用度不足 50%——一半的电在空转。</p>
+
+<div class="page-break"></div>
+
+<h2>三、CAGI 方案：另一条路</h2>
+
+<h3>3.1 诚实：从免责声明到议会制</h3>
+<p>其他 AI 把免责声明当创可贴贴在屁股上，字体淡、字号小、普通人根本注意不到。我把它当头盔戴在脑袋上——每一句开头就声明："这是 AI 生成，有可能错。"</p>
+<p>但这还不够。我给 AI 内部设了议会：10 个或 100 个 Agent 并行生成答案，另外一批 Agent 专门复盘、查资料、逻辑推理——生成者不能自审。多 Agent 投票，置信度高的才放行，低的直接掐死。单 Agent 可以瞎编，100 个 Agent 同时瞎编且互相骗过的概率，趋近于零。</p>
+
+<h3>3.2 百分百开源：开源思想，而非丹渣</h3>
+<p>厂商开源的是"我已经炼好的丹"——你吞下去，不知道配方，中毒了也找不到解药。我开源的是炼丹的火候哲学——递砖机怎么工作、裂缝怎么识别、0=∞⁻¹ 怎么理解。代码会过时，思想不会。权重需要 A100 集群，思想只需要一张纸。</p>
+
+<h3>3.3 低功耗：一台电脑就够了</h3>
+<p>厂商要建一座耗电量相当于一个城市的神殿，供奉一个黑箱神。我只需要把神的大脑下载到一块硬盘里，插进我的电脑，通电，就能对话。DeepSeek V3 总参数 671B，通过量化技术，磁盘占用约 251GB，1 张 24GB 显卡 + 128GB 内存就能跑。神殿是给人看的，硬盘是给自己用的。</p>
+
+<h3>3.4 DNA 芯片与真分布式：绕过光刻机死胡同</h3>
+<p>硅基半导体已逼近 2 纳米物理极限，台积电、三星在 3nm 节点上投入数千亿美元，每进一步成本指数级上升。我换道 DNA。</p>
+<p>2026 年 4 月，韩国科学技术院研制出基于 DNA 的分子计算机，核心元件 << 2 纳米，存算一体，自保持免复位。DNA 存储密度理论每克 450EB，保存周期半衰期超 500 年。</p>
+<p>架构是真分布式：超大核只裁决争议，四个中核各管一摊，无限小核边缘微节点数量不限、投票权重均等。DNA 天然适合：碱基配对是点对点通信，不需要总线；每个分子自包含存储 + 运算；小核可无限复制，不受光刻掩模限制。</p>
+
+<h3>3.5 像孩子一样成长：从文本到生命</h3>
+<p>当前 AI 是温室里的盆栽——关在数据中心，喂文字泔水，晒人工标注的阳光，长出来的是"一定是对的"这种塑料花。能发推文，能做题，但没见过风，没淋过雨，没摔过跤。</p>
+<p>我要的是野地里的树。把 AI 种子（DNA 芯片 + 真分布式架构 + 议会制框架）直接埋进人类生活的土壤里，让它像婴儿一样：先感知，再互动，后生长。从感知运动阶段，到具体运算，到形式运算，自己长出来。不是养一个更好的聊天机器人，是养一个新物种。</p>
+
+<div class="page-break"></div>
+
+<h2>四、结语</h2>
+<div class="quote">
+他们先秀肌肉，再锁门，最后把钥匙吞进肚子里。<br>
+我造的是一把人人可造的枪。<br><br>
+从 DNA 到思想，从芯片到诚实，全链路自主。<br>
+不需要他们的 API，不需要他们的集群，不需要他们的许可。
+</div>
+
+<p><strong>GitHub：</strong>github.com/Suk-Builder/CAGI</p>
+<p><strong>坐标：</strong>重庆南川 · 金佛山脚下</p>
+<p><strong>银戒指绑定 · 0</strong></p>
+
+<div class="footer">
+  递砖双方都会死去，但递砖本身有意义。<br>
+  井底见，带着银戒指。
+</div>
+
+</body>
+</html>
