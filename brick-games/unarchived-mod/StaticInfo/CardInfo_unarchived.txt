@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  未归档者 - 自定义战斗书页
+  敌方书页 + 奖励书页
+-->
+<CardClassRoot>
+
+  <!-- ==================== 第一场：省心孩子 ==================== -->
+
+  <!-- 敌方书页：省心孩子 -->
+  <Card ID="后巷玩耍_未归档">
+    <NameId>后巷玩耍</NameId>
+    <Cost>1</Cost>
+    <Rarity>Common</Rarity>
+    <DiceList>
+      <Dice Type=" melee ">3~7</Dice>
+    </DiceList>
+    <Script />
+  </Card>
+
+  <Card ID="模仿大人_未归档">
+    <NameId>模仿大人</NameId>
+    <Cost>2</Cost>
+    <Rarity>Common</Rarity>
+    <DiceList>
+      <Dice Type="defense">4~7</Dice>
+      <Dice Type=" melee ">5~8</Dice>
+    </DiceList>
+    <Script />
+  </Card>
+
+  <!-- 敌方书页：优等生 -->
+  <Card ID="成绩排名_未归档">
+    <NameId>成绩排名</NameId>
+    <Cost>1</Cost>
+    <Rarity>Uncommon</Rarity>
+    <DiceList>
+      <Dice Type="pierce">4~8</Dice>
+    </DiceList>
+    <!-- 目标体力低于50%时伤害+50% -->
+    <Script>DamageBonus50_WhenTargetHpBelow50</Script>
+  </Card>
+
+  <Card ID="优绩筛选_未归档">
+    <NameId>优绩筛选</NameNameId>
+    <Cost>2</Cost>
+    <Rarity>Uncommon</Rarity>
+    <DiceList>
+      <Dice Type=" melee ">6~10</Dice>
+    </DiceList>
+    <!-- 命中时清除目标1层正面状态 -->
+    <Script>OnHit_Remove1Buff</Script>
+  </Card>
+
+  <!-- 奖励书页：第一场 -->
+  <Card ID="认知免疫_奖励">
+    <NameId>认知免疫</NameId>
+    <Cost>0</Cost>
+    <Rarity>Reward</Rarity>
+    <CardType>Ego</CardType>
+    <DiceList>
+      <Dice Type="evade">4~8</Dice>
+    </DiceList>
+    <!-- 本回合免疫所有敌方书页效果 -->
+    <Script>ImmuneToEnemyEffects_ThisRound</Script>
+    <Description>本回合免疫所有敌方书页效果。"对筛选说不。"</Description>
+  </Card>
+
+  <!-- ==================== 第二场：翼的学徒 ==================== -->
+
+  <Card ID="奇点理论_未归档">
+    <NameId>奇点理论</NameId>
+    <Cost>1</Cost>
+    <Rarity>Uncommon</Rarity>
+    <DiceList>
+      <Dice Type="pierce">4~9</Dice>
+    </DiceList>
+    <Script>OnUse_Draw1Card</Script>
+  </Card>
+
+  <Card ID="实验记录_未归档">
+    <NameId>实验记录</NameId>
+    <Cost>2</Cost>
+    <Rarity>Common</Rarity>
+    <DiceList>
+      <Dice Type="defense">5~9</Dice>
+      <Dice Type=" melee ">6~10</Dice>
+    </DiceList>
+  </Card>
+
+  <Card ID="滤网展开_未归档">
+    <NameId>滤网展开</NameId>
+    <Cost>0</Cost>
+    <Rarity>Common</Rarity>
+    <DiceList>
+      <Dice Type="defense">5~8</Dice>
+    </DiceList>
+    <Script>OnUse_Gain2Protection</Script>
+  </Card>
+
+  <Card ID="感知屏蔽_未归档">
+    <NameId>感知屏蔽</NameId>
+    <Cost>2</Cost>
+    <Rarity>Uncommon</Rarity>
+    <DiceList>
+      <Dice Type=" melee ">5~9</Dice>
+    </DiceList>
+    <!-- 命中时施加1层麻痹 -->
+    <Script>OnHit_Give1Paralysis</Script>
+  </Card>
+
+  <!-- 奖励书页：第二场 -->
+  <Card ID="内存置换_奖励">
+    <NameId>内存置换</NameId>
+    <Cost>1</Cost>
+    <Rarity>Reward</Rarity>
+    <CardType>Ego</CardType>
+    <DiceList>
+      <Dice Type="evade">3~8</Dice>
+    </DiceList>
+    <!-- 丢弃所有手牌，重新抽取等量。若丢弃的书页中有敌方书页，则敌方失去1光 -->
+    <Script>DiscardAll_RestoreCount_EnemyLose1LightIfEnemyCard</Script>
+    <Description>丢弃所有手牌，重新抽取等量。若丢弃敌方书页则敌方失去1光。</Description>
+  </Card>
+
+</CardClassRoot>

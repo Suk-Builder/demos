@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  未归档者 - 第一场：省心孩子
+  敌方核心书页与战斗书页配置
+-->
+<EnemyUnitClassRoot>
+
+  <!-- ====== 省心孩子 (杂兵 x3) ====== -->
+  <Enemy ID="省心孩子_A">
+    <NameId>省心孩子</NameId>
+    <Hp>45</Hp>
+    <Break>35</Break>
+    <SpeedMin>2</SpeedMin>
+    <SpeedMax>4</SpeedMax>
+    <Light>3</Light>
+    <SpeedDiceNum>2</SpeedDiceNum>
+    <DropBook>省心孩子之书</DropBook>
+    <Deck>
+      <Card>后巷玩耍_未归档</Card>
+      <Card>后巷玩耍_未归档</Card>
+      <Card>模仿大人_未归档</Card>
+    </Deck>
+    <Passive />
+  </Enemy>
+
+  <Enemy ID="省心孩子_B">
+    <NameId>省心孩子</NameId>
+    <Hp>45</Hp>
+    <Break>35</Break>
+    <SpeedMin>2</SpeedMin>
+    <SpeedMax>4</SpeedMax>
+    <Light>3</Light>
+    <SpeedDiceNum>2</SpeedDiceNum>
+    <DropBook>省心孩子之书</DropBook>
+    <Deck>
+      <Card>后巷玩耍_未归档</Card>
+      <Card>后巷玩耍_未归档</Card>
+      <Card>模仿大人_未归档</Card>
+    </Deck>
+    <Passive />
+  </Enemy>
+
+  <Enemy ID="省心孩子_C">
+    <NameId>省心孩子</NameId>
+    <Hp>45</Hp>
+    <Break>35</Break>
+    <SpeedMin>2</SpeedMin>
+    <SpeedMax>4</SpeedMax>
+    <Light>3</Light>
+    <SpeedDiceNum>2</SpeedDiceNum>
+    <DropBook>省心孩子之书</DropBook>
+    <Deck>
+      <Card>后巷玩耍_未归档</Card>
+      <Card>后巷玩耍_未归档</Card>
+      <Card>模仿大人_未归档</Card>
+    </Deck>
+    <Passive />
+  </Enemy>
+
+  <!-- ====== 优等生 (首领 x1) ====== -->
+  <Enemy ID="优等生_首领">
+    <NameId>优等生</NameId>
+    <Hp>85</Hp>
+    <Break>65</Break>
+    <SpeedMin>3</SpeedMin>
+    <SpeedMax>5</SpeedMax>
+    <Light>4</Light>
+    <SpeedDiceNum>3</SpeedDiceNum>
+    <DropBook>省心孩子之书_首领</DropBook>
+    <Deck>
+      <Card>成绩排名_未归档</Card>
+      <Card>成绩排名_未归档</Card>
+      <Card>优绩筛选_未归档</Card>
+      <Card>模仿大人_未归档</Card>
+    </Deck>
+    <Passive>
+      <!-- 优绩主义的筛选：优先攻击体力最低的司书 -->
+      <PassiveName>优绩筛选_优先低体力</PassiveName>
+      <!-- 劣等标记：被攻击的司书受到伤害+20%，持续2回合 -->
+      <BuffOnHit>劣等_2回合</BuffOnHit>
+      <!-- 焦躁：省心孩子死亡时，优等生速度+1，伤害+15% -->
+      <OnAllyDeath>焦躁_速度1_伤害15</OnAllyDeath>
+    </Passive>
+  </Enemy>
+
+</EnemyUnitClassRoot>

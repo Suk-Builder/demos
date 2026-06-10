@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<BattleCardDescRoot>
+
+  <!-- 敌方书页 -->
+  <CardDesc ID="后巷玩耍_未归档">
+    <Name>后巷玩耍</Name>
+    <Desc>在后巷中学会的玩耍方式。1费 [ melee ] 3-7</Desc>
+  </CardDesc>
+
+  <CardDesc ID="模仿大人_未归档">
+    <Name>模仿大人</Name>
+    <Desc>孩子模仿大人打架的样子。2费 [防御] 4-7 / [ melee ] 5-8</Desc>
+  </CardDesc>
+
+  <CardDesc ID="成绩排名_未归档">
+    <Name>成绩排名</Name>
+    <Desc>优绩主义的刀刃。1费 [突刺] 4-8。目标体力低于50%时伤害+50%。</Desc>
+  </CardDesc>
+
+  <CardDesc ID="优绩筛选_未归档">
+    <Name>优绩筛选</Name>
+    <Desc>制度性的分类与淘汰。2费 [ melee ] 6-10。命中时清除目标1层正面状态。</Desc>
+  </CardDesc>
+
+  <CardDesc ID="奇点理论_未归档">
+    <Name>奇点理论</Name>
+    <Desc>翼的科学，后巷的梦。1费 [突刺] 4-9。使用时抽取1张书页。</Desc>
+  </CardDesc>
+
+  <CardDesc ID="实验记录_未归档">
+    <Name>实验记录</Name>
+    <Desc>被封存的实验数据。2费 [防御] 5-9 / [ melee ] 6-10</Desc>
+  </CardDesc>
+
+  <CardDesc ID="滤网展开_未归档">
+    <Name>滤网展开</Name>
+    <Desc>认知滤网覆盖感知。0费 [防御] 5-8。使用时获得2层守护。</Desc>
+  </CardDesc>
+
+  <CardDesc ID="感知屏蔽_未归档">
+    <Name>感知屏蔽</Name>
+    <Desc>被过滤的真实。2费 [ melee ] 5-9。命中时施加1层麻痹。</Desc>
+  </CardDesc>
+
+  <!-- 奖励书页 -->
+  <CardDesc ID="认知免疫_奖励">
+    <Name>认知免疫</Name>
+    <Desc>"对筛选说不。"
+    0费 E.G.O [闪避] 4-8
+    本回合免疫所有敌方书页效果。</Desc>
+  </CardDesc>
+
+  <CardDesc ID="内存置换_奖励">
+    <Name>内存置换</Name>
+    <Desc>"把不需要的丢弃，空出位置给重要的。"
+    1费 E.G.O [闪避] 3-8
+    丢弃所有手牌，重新抽取等量。若丢弃敌方书页则敌方失去1光。</Desc>
+  </CardDesc>
+
+</BattleCardDescRoot>

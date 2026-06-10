@@ -1,0 +1,67 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AssemblyName>Unarchived</AssemblyName>
+    <RootNamespace>Unarchived</RootNamespace>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <!-- 
+    引用路径说明：
+    这些DLL来自游戏本体和BaseMod，需要在游戏目录中找到。
+    请在Visual Studio中根据实际路径修改。
+  -->
+  <ItemGroup>
+    <!-- Unity核心 -->
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(LibraryOfRuinaPath)\LibraryOfRuina_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>$(LibraryOfRuinaPath)\LibraryOfRuina_Data\Managed\UnityEngine.UI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>$(LibraryOfRuinaPath)\LibraryOfRuina_Data\Managed\UnityEngine.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    
+    <!-- 游戏本体 -->
+    <Reference Include="Assembly-CSharp">
+      <HintPath>$(LibraryOfRuinaPath)\LibraryOfRuina_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>$(LibraryOfRuinaPath)\LibraryOfRuina_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    
+    <!-- BaseMod -->
+    <Reference Include="BaseMod">
+      <HintPath>$(LibraryOfRuinaPath)\LibraryOfRuina_Data\Managed\BaseMod\BaseMod for Workshop\Assemblies\BaseMod.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    
+    <!-- Harmony（通过NuGet或手动引用） -->
+    <Reference Include="0Harmony">
+      <HintPath>$(LibraryOfRuinaPath)\LibraryOfRuina_Data\Managed\BaseMod\BaseMod for Workshop\Assemblies\0Harmony.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    
+    <!-- .NET框架 -->
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+
+  <!-- 编译后自动复制到Mod目录 -->
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="copy &quot;$(TargetPath)&quot; &quot;$(SolutionDir)..\Assemblies\Unarchived.dll&quot; /Y" />
+  </Target>
+
+</Project>

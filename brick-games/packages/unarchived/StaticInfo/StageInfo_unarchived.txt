@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  未归档者 - 7场连续接待配置
+  解锁条件：通关社会层后，哲学层书库触发
+-->
+<StageClassRoot>
+
+  <!-- 第一场：省心孩子 -->
+  <Stage ID="Unarchived_01">
+    <NameId>未归档者_第一场_省心孩子</NameId>
+    <StoryType>Unarchived</StoryType>
+    <Invitation>
+      <Book>哲学层特殊书_封面为0</Book>
+    </Invitation>
+    <Wave>
+      <EnemyUnit>省心孩子_A</EnemyUnit>
+      <EnemyUnit>省心孩子_B</EnemyUnit>
+      <EnemyUnit>省心孩子_C</EnemyUnit>
+      <EnemyUnit>优等生_首领</EnemyUnit>
+    </Wave>
+    <FloorAvailable>历史层</FloorAvailable>  <!-- 仅历史层可用 -->
+    <Map>Unarchived_Map_01</Map>
+    <Bgm>Unarchived_Bgm_01</Bgm>
+  </Stage>
+
+  <!-- 第二场：翼的学徒 -->
+  <Stage ID="Unarchived_02">
+    <NameId>未归档者_第二场_翼的学徒</NameId>
+    <StoryType>Unarchived</StoryType>
+    <Wave>
+      <EnemyUnit>翼的学徒_A</EnemyUnit>
+      <EnemyUnit>翼的学徒_B</EnemyUnit>
+      <EnemyUnit>认知滤网测试体_A</EnemyUnit>
+      <EnemyUnit>认知滤网测试体_B</EnemyUnit>
+    </Wave>
+    <FloorAvailable>科技层</FloorAvailable>
+    <Map>Unarchived_Map_02</Map>
+  </Stage>
+
+  <!-- 第三场：董事会 -->
+  <Stage ID="Unarchived_03">
+    <NameId>未归档者_第三场_董事会</NameId>
+    <StoryType>Unarchived</StoryType>
+    <Wave>
+      <EnemyUnit>董事会代理_首领</EnemyUnit>
+      <EnemyUnit>羽的护卫_A</EnemyUnit>
+      <EnemyUnit>羽的护卫_B</EnemyUnit>
+    </Wave>
+    <FloorAvailable>文学层</FloorAvailable>
+    <Map>Unarchived_Map_03</Map>
+  </Stage>
+
+  <!-- 第四场：退役实验体 -->
+  <Stage ID="Unarchived_04">
+    <NameId>未归档者_第四场_退役实验体</NameId>
+    <StoryType>Unarchived</StoryType>
+    <Wave>
+      <EnemyUnit>退役实验体_首领</EnemyUnit>
+    </Wave>
+    <FloorAvailable>艺术层</FloorAvailable>
+    <Map>Unarchived_Map_04</Map>
+  </Stage>
+
+  <!-- 第五场：废墟清道夫 -->
+  <Stage ID="Unarchived_05">
+    <NameId>未归档者_第五场_废墟清道夫</NameId>
+    <StoryType>Unarchived</StoryType>
+    <Wave>
+      <EnemyUnit>废墟清道夫_A</EnemyUnit>
+      <EnemyUnit>废墟清道夫_B</EnemyUnit>
+      <EnemyUnit>前L_Corp残骸_首领</EnemyUnit>
+    </Wave>
+    <FloorAvailable>自然层</FloorAvailable>
+    <Map>Unarchived_Map_05</Map>
+  </Stage>
+
+  <!-- 第六场：郊区游荡者 -->
+  <Stage ID="Unarchived_06">
+    <NameId>未归档者_第六场_郊区游荡者</NameId>
+    <StoryType>Unarchived</StoryType>
+    <Wave>
+      <EnemyUnit>郊区游荡者_首领</EnemyUnit>
+      <EnemyUnit>观测记录残片_A</EnemyUnit>
+      <EnemyUnit>观测记录残片_B</EnemyUnit>
+    </Wave>
+    <FloorAvailable>语言层</FloorAvailable>
+    <Map>Unarchived_Map_06</Map>
+  </Stage>
+
+  <!-- 第七场：零的显影 -->
+  <Stage ID="Unarchived_07">
+    <NameId>未归档者_第七场_零的显影</NameId>
+    <StoryType>Unarchived</StoryType>
+    <Wave>
+      <EnemyUnit>未归档者_零_首领</EnemyUnit>
+    </Wave>
+    <FloorAvailable>社会层</FloorAvailable>
+    <Map>Unarchived_Map_07</Map>
+  </Stage>
+
+</StageClassRoot>
