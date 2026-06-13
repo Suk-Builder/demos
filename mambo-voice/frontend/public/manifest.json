@@ -1,0 +1,13 @@
+{
+  "name": "曼波语音助手",
+  "short_name": "曼波",
+  "description": "你的AI语音伴侣",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1a2e",
+  "theme_color": "#667eea",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

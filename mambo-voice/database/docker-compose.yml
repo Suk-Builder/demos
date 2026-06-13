@@ -1,0 +1,158 @@
+# ============================================================
+# 曼波语音助手 - 本地开发环境 Docker Compose 配置
+# 服务: PostgreSQL 15 + pgvector 扩展
+# 用途: 提供本地开发和测试的数据库环境
+# ============================================================
+
+version: "3.8"
+
+services:
+  # PostgreSQL 主数据库服务
+  postgres:
+    # 使用包含 pgvector 预装的官方镜像
+    image: ankane/pgvector:v0.5.1
+    container_name: mambo-postgres
+    restart: unless-stopped
+
+    # 环境变量配置
+    environment:
+      # 超级用户密码（本地开发使用简单密码）
+      # 生产环境请务必使用强密码并通过 secrets 管理
+      POSTGRES_PASSWORD: mambo_dev_2024
+      # 默认数据库名称
+      POSTGRES_DB: mambo
+      # 默认超级用户名
+      POSTGRES_USER: postgres
+      # 时区设置
+      TZ: Asia/Shanghai
+      PGTZ: Asia/Shanghai
+
+    # 端口映射
+    # 主机 5432 端口映射到容器 5432 端口
+    # 如果本地 5432 被占用，可修改为 "5433:5432"
+    ports:
+      - "5432:5432"
+
+    # 数据卷挂载
+    volumes:
+      # 持久化数据存储 - 使用命名卷
+      - postgres_data:/var/lib/postgresql/data
+      # 初始化脚本挂载 - 首次启动时自动执行
+      # 将迁移脚本和种子数据复制到 docker-entrypoint-initdb.d 目录
+      # PostgreSQL 会在首次启动时按文件名顺序执行 .sql 和 .sh 文件
+      - ./migrations/001_init.sql:/docker-entrypoint-initdb.d/001_init.sql:ro
+      - ./seeds.sql:/docker-entrypoint-initdb.d/002_seeds.sql:ro
+
+    # 资源限制（根据开发机器配置调整）
+    deploy:
+      resources:
+        limits:
+          # 内存限制 1GB
+          memory: 1G
+        reservations:
+          # 预留内存 256MB
+          memory: 256M
+
+    # 健康检查配置
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d mambo"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+    # 日志配置
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+    # 网络配置
+    networks:
+      - mambo-network
+
+    # 标签信息
+    labels:
+      - "app=mambo-voice-assistant"
+      - "component=database"
+      - "environment=development"
+
+  # （可选）pgAdmin 4 - 数据库图形化管理工具
+  # 取消注释以下部分即可启用
+  # pgadmin:
+  #   image: dpage/pgadmin4:latest
+  #   container_name: mambo-pgadmin
+  #   restart: unless-stopped
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: admin@mambo.local
+  #     PGADMIN_DEFAULT_PASSWORD: admin123
+  #     PGADMIN_CONFIG_SERVER_MODE: "False"
+  #   ports:
+  #     - "5050:80"
+  #   volumes:
+  #     - pgadmin_data:/var/lib/pgadmin
+  #   networks:
+  #     - mambo-network
+  #   depends_on:
+  #     postgres:
+  #       condition: service_healthy
+  #   labels:
+  #     - "app=mambo-voice-assistant"
+  #     - "component=pgadmin"
+
+# 命名卷定义
+volumes:
+  postgres_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./data/postgres
+  # pgadmin_data:
+  #   driver: local
+
+# 网络定义
+networks:
+  mambo-network:
+    driver: bridge
+    name: mambo-network
+
+# ============================================================
+# 使用说明
+# ============================================================
+#
+# 1. 首次启动:
+#    docker-compose up -d
+#
+# 2. 查看日志:
+#    docker-compose logs -f postgres
+#
+# 3. 连接数据库:
+#    psql -h localhost -p 5432 -U postgres -d mambo
+#    密码: mambo_dev_2024
+#
+# 4. 停止服务:
+#    docker-compose down
+#
+# 5. 停止并删除数据（谨慎操作）:
+#    docker-compose down -v
+#
+# 6. 重启服务:
+#    docker-compose restart
+#
+# 7. 进入容器:
+#    docker exec -it mambo-postgres psql -U postgres -d mambo
+#
+# ============================================================
+# 数据库连接配置（应用层使用）
+# ============================================================
+# 数据库URL格式:
+#   postgresql://postgres:mambo_dev_2024@localhost:5432/mambo
+#
+# 连接池配置建议:
+#   - 最小连接数: 5
+#   - 最大连接数: 20
+#   - 连接超时: 30秒
+#   - 空闲超时: 10分钟
+# ============================================================

@@ -1,0 +1,323 @@
+/* ============================================================
+   曼波语音助手 - 全局样式
+   设计风格：二次元/可爱/简洁，深色背景+紫色主题
+   ============================================================ */
+
+/* Tailwind CSS 基础导入 */
+@import "tailwindcss";
+
+/* ------------------------------------------------------------
+   全局变量定义
+   ------------------------------------------------------------ */
+@theme {
+  /* 主色调 - 紫色系 */
+  --color-primary: #667eea;
+  --color-primary-dark: #764ba2;
+  --color-primary-light: #a78bfa;
+
+  /* 背景色 - 深色系列 */
+  --color-bg-base: #1a1a2e;
+  --color-bg-card: #16213e;
+  --color-bg-hover: #1f2b47;
+
+  /* 曼波气泡色 - 粉色系 */
+  --color-mambo: #f8a5c2;
+  --color-mambo-dark: #e887a8;
+
+  /* 用户气泡色 - 蓝色系 */
+  --color-user: #4a90d9;
+  --color-user-dark: #3a7bc8;
+
+  /* 文字颜色 */
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #b8c5d6;
+  --color-text-muted: #6b7280;
+
+  /* 情绪指示器颜色 */
+  --color-mood-happy: #fbbf24;
+  --color-mood-confused: #9ca3af;
+  --color-mood-worried: #60a5fa;
+  --color-mood-shy: #f9a8d4;
+  --color-mood-bored: #9ca3af;
+  --color-mood-angry: #f87171;
+
+  /* 状态颜色 */
+  --color-listening: #ef4444;
+  --color-speaking: #22c55e;
+}
+
+/* ------------------------------------------------------------
+   全局基础样式
+   ------------------------------------------------------------ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family:
+    "Nunito",
+    "Quicksand",
+    "PingFang SC",
+    "Microsoft YaHei",
+    sans-serif;
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+/* 隐藏滚动条但保留滚动功能 */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* ------------------------------------------------------------
+   动画定义
+   ------------------------------------------------------------ */
+
+/* 呼吸动画 - 用于空闲状态按钮 */
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 40px rgba(102, 126, 234, 0.7);
+  }
+}
+
+/* 脉冲动画 - 用于录音状态 */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/* 波浪动画 - 用于播放状态 */
+@keyframes wave {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.8;
+  }
+}
+
+/* 声波波纹动画 */
+@keyframes sound-wave {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* 气泡入场动画 - 淡入+上浮 */
+@keyframes bubble-in {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 消息滑入动画 - 从右侧 */
+@keyframes slide-in-right {
+  0% {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* 消息滑入动画 - 从左侧 */
+@keyframes slide-in-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* 浮动动画 - 用于装饰元素 */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* 情绪表情弹跳动画 */
+@keyframes mood-bounce {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.2);
+  }
+  50% {
+    transform: scale(0.95);
+  }
+  75% {
+    transform: scale(1.1);
+  }
+}
+
+/* 渐变背景动画 */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* 闪烁动画 - 用于录音指示 */
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+/* ------------------------------------------------------------
+   动画工具类
+   ------------------------------------------------------------ */
+.animate-breathe {
+  animation: breathe 2s ease-in-out infinite;
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 1.2s ease-out infinite;
+}
+
+.animate-wave {
+  animation: wave 1s ease-in-out infinite;
+}
+
+.animate-bubble-in {
+  animation: bubble-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.35s ease-out forwards;
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 0.35s ease-out forwards;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-mood-bounce {
+  animation: mood-bounce 0.5s ease-out;
+}
+
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradient-shift 4s ease infinite;
+}
+
+.animate-blink {
+  animation: blink 1s ease-in-out infinite;
+}
+
+/* ------------------------------------------------------------
+   自定义样式工具类
+   ------------------------------------------------------------ */
+
+/* 毛玻璃效果 */
+.glass {
+  background: rgba(22, 33, 62, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* 紫色渐变背景 */
+.gradient-purple {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* 可爱圆角 */
+.rounded-cute {
+  border-radius: 20px;
+}
+
+.rounded-cute-lg {
+  border-radius: 28px;
+}
+
+/* 柔和阴影 */
+.shadow-soft {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.shadow-glow-purple {
+  box-shadow: 0 0 30px rgba(102, 126, 234, 0.3);
+}
+
+/* 文字渐变色 */
+.text-gradient-purple {
+  background: linear-gradient(135deg, #667eea 0%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

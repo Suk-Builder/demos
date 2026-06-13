@@ -1,0 +1,66 @@
+# ============================================
+# 曼波语音助手 — 后端构建 Dockerfile
+# 基于 Node.js 18 Alpine
+# ============================================
+
+FROM node:18-alpine
+
+# 维护者标签
+LABEL maintainer="sukaczev"
+LABEL project="mambo-voice-assistant"
+LABEL version="1.0.0"
+LABEL service="backend"
+
+# 设置工作目录
+WORKDIR /app
+
+# 安装必要依赖：
+# - python3, make, g++：用于编译原生Node模块（如bcrypt、pg-native等）
+# - curl：用于健康检查
+# - postgresql-client：用于数据库连接测试和迁移
+RUN apk add --no-cache \
+    python3 \
+    make \
+    g++ \
+    curl \
+    postgresql-client
+
+# 优先复制依赖文件（利用Docker缓存层优化）
+COPY backend/package.json backend/package-lock.json* ./
+
+# 安装所有依赖（包含devDependencies，用于启动）
+RUN npm ci --only=production
+
+# 复制后端源代码
+COPY backend/ .
+
+# 复制数据库初始化脚本（用于首次启动时初始化）
+COPY database/ ./database/
+
+# 创建日志目录
+RUN mkdir -p /app/logs && \
+    chown -R node:node /app/logs
+
+# 创建上传文件临时目录
+RUN mkdir -p /app/uploads && \
+    chown -R node:node /app/uploads
+
+# 切换到非root用户运行（安全最佳实践）
+USER node
+
+# 暴露后端服务端口
+EXPOSE 3001
+
+# 健康检查：每30秒检查API服务是否正常
+# 返回HTTP 200表示健康，其他状态码表示不健康
+HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
+    CMD curl -f http://localhost:3001/health || exit 1
+
+# 设置环境变量默认值
+ENV NODE_ENV=production \
+    PORT=3001 \
+    LOG_LEVEL=info \
+    REQUEST_TIMEOUT=30000
+
+# 启动命令：使用node直接启动（生产环境建议配合PM2或类似工具）
+CMD ["node", "server.js"]

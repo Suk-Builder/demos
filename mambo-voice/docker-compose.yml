@@ -1,0 +1,217 @@
+# ============================================
+# 曼波语音助手 — Docker Compose 完整编排
+# 服务：前端(Nginx) + 后端(Node.js) + 数据库(PostgreSQL) + 缓存(Redis)
+# ============================================
+
+version: "3.8"
+
+# -------------------------------
+# 服务定义
+# -------------------------------
+services:
+  # ---- 前端服务：Nginx静态文件服务器 ----
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      # 构建参数：传递给前端的API地址
+      args:
+        VITE_API_BASE_URL: /api
+        VITE_APP_NAME: 曼波语音助手
+        VITE_WS_URL: wss://mambo.sukaczev.top/ws
+        VITE_MAX_HISTORY: "50"
+    container_name: mambo-frontend
+    restart: unless-stopped
+    ports:
+      # 仅暴露80端口到本机，SSL由外部Nginx/Traefik处理
+      - "8080:80"
+    networks:
+      - mambo-network
+    depends_on:
+      backend:
+        condition: service_healthy
+    # 健康检查
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    # 日志配置
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # ---- 后端服务：Node.js API ----
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: mambo-backend
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    environment:
+      # 数据库连接信息（从环境变量文件加载）
+      DATABASE_URL: ${DATABASE_URL:-postgres://mambo:mambo_secret@db:5432/mambo_db}
+      # Redis缓存地址
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379}
+      # DeepSeek API密钥（从.env加载）
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY}
+      DEEPSEEK_BASE_URL: ${DEEPSEEK_BASE_URL:-https://api.deepseek.com}
+      # JWT密钥（从.env加载）
+      JWT_SECRET: ${JWT_SECRET}
+      # 语音服务配置
+      TTS_ENABLED: ${TTS_ENABLED:-true}
+      STT_ENABLED: ${STT_ENABLED:-true}
+      # 运行时环境
+      NODE_ENV: production
+      PORT: 3001
+      LOG_LEVEL: info
+      # CORS配置
+      CORS_ORIGIN: ${CORS_ORIGIN:-https://mambo.sukaczev.top}
+      # 请求超时（毫秒）
+      REQUEST_TIMEOUT: 30000
+      # 数据库连接池配置
+      DB_POOL_MIN: 2
+      DB_POOL_MAX: 10
+      DB_CONNECTION_TIMEOUT: 5000
+    networks:
+      - mambo-network
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    # 健康检查
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    # 日志配置
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "5"
+
+  # ---- 数据库服务：PostgreSQL 15 + pgvector ----
+  db:
+    image: ankane/pgvector:v0.5.1
+    container_name: mambo-db
+    restart: unless-stopped
+    environment:
+      # 创建应用专用超级用户和密码
+      # 优先级: DB_PASSWORD > POSTGRES_PASSWORD > 默认值(mambo_secret)
+      POSTGRES_USER: mambo
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-${POSTGRES_PASSWORD:-mambo_secret}}
+      POSTGRES_DB: mambo_db
+      # 性能优化参数
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --locale=C"
+      # 时区设置
+      TZ: Asia/Shanghai
+      PGTZ: Asia/Shanghai
+    volumes:
+      # 数据持久化卷
+      - postgres_data:/var/lib/postgresql/data
+      # 初始化SQL脚本（首次启动自动执行）
+      - ./database/init.sql:/docker-entrypoint-initdb.d/01-init.sql
+      # 数据库Schema（由后端迁移管理，也可手动执行）
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/02-schema.sql
+    ports:
+      # 仅暴露到本机，不对外公开
+      - "127.0.0.1:5432:5432"
+    networks:
+      - mambo-network
+    # 性能优化配置
+    command: >
+      postgres
+      -c shared_preload_libraries=pgvector
+      -c max_connections=100
+      -c shared_buffers=256MB
+      -c effective_cache_size=768MB
+      -c maintenance_work_mem=64MB
+      -c wal_buffers=16MB
+      -c default_statistics_target=100
+      -c random_page_cost=1.1
+      -c effective_io_concurrency=200
+      -c work_mem=8MB
+      -c min_wal_size=1GB
+      -c max_wal_size=4GB
+    # 健康检查：检查PostgreSQL是否就绪
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mambo -d mambo_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    # 日志配置
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "5"
+
+  # ---- 缓存服务：Redis ----
+  redis:
+    image: redis:7-alpine
+    container_name: mambo-redis
+    restart: unless-stopped
+    command: >
+      redis-server
+      --maxmemory 256mb
+      --maxmemory-policy allkeys-lru
+      --appendonly yes
+      --appendfsync everysec
+    volumes:
+      # Redis数据持久化
+      - redis_data:/data
+    ports:
+      # 仅暴露到本机
+      - "127.0.0.1:6379:6379"
+    networks:
+      - mambo-network
+    # 健康检查
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    # 日志配置
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+# -------------------------------
+# 网络配置
+# -------------------------------
+networks:
+  mambo-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
+    labels:
+      com.mambo.description: "曼波语音助手内部通信网络"
+
+# -------------------------------
+# 数据卷配置
+# -------------------------------
+volumes:
+  # PostgreSQL数据持久化
+  postgres_data:
+    driver: local
+    labels:
+      com.mambo.service: "database"
+  # Redis数据持久化
+  redis_data:
+    driver: local
+    labels:
+      com.mambo.service: "cache"
